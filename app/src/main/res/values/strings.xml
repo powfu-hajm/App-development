@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">青心伴</string>
+
+    <!-- 聊天界面字符串资源 -->
+    <string name="ai_assistant_title">您的AI心理助手</string>
+    <string name="welcome_message">欢迎使用AI心理助手！\n请在下方向我提问...</string>
+    <string name="input_hint">输入你的问题或感受...</string>
+    <string name="send_button">发送</string>
+
+    <!-- 其他界面可能用到的字符串 -->
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="diary">日记</string>
+    <string name="profile">个人资料</string>
+</resources>
