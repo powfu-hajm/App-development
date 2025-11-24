@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_grey"
+    android:background="@android:color/system_accent1_100"
     android:fillViewport="true">
 
     <LinearLayout
@@ -28,7 +28,7 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/ic_launcher_foreground"
+                    android:src="@drawable/ic_profile_user"
                     android:layout_marginEnd="16dp" />
 
                 <LinearLayout
@@ -67,7 +67,7 @@
                     android:id="@+id/btnEditProfile"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_launcher_foreground"
+                    android:src="@android:drawable/ic_menu_myplaces"
                     android:background="?attr/selectableItemBackgroundBorderless" />
 
             </LinearLayout>
@@ -100,11 +100,11 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="28"
-                        android:textSize="24sp"
                         android:textColor="@color/primary_blue"
-                        android:textStyle="bold"
-                        android:gravity="center" />
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="match_parent"
