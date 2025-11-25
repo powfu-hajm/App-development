@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
+        <!-- 欢迎卡片 - 添加缺失的ID -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +25,9 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
+                <!-- 添加ID：tvGreeting -->
                 <TextView
+                    android:id="@+id/tvGreeting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="晚上好，用户"
@@ -33,7 +35,9 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
+                <!-- 添加ID：tvDate -->
                 <TextView
+                    android:id="@+id/tvDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="今天是2025年09月30日"
@@ -54,13 +58,12 @@
 
         </androidx.cardview.widget.CardView>
 
-
+        <!-- 功能卡片区域 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16dp">
-
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_chat"
@@ -68,6 +71,9 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp">
 
@@ -97,13 +103,15 @@
 
             </androidx.cardview.widget.CardView>
 
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_diary"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp">
 
@@ -133,13 +141,15 @@
 
             </androidx.cardview.widget.CardView>
 
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_test"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp">
 
@@ -171,6 +181,7 @@
 
         </LinearLayout>
 
+        <!-- 每日推送文章区域 -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -183,12 +194,23 @@
             android:paddingTop="16dp"
             android:paddingBottom="8dp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewArticles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp" />
+
+        <!-- 文章卡片 - 添加点击功能 -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/card_daily_article"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp">
 
@@ -226,6 +248,7 @@
 
         </androidx.cardview.widget.CardView>
 
+        <!-- 心理日签区域 -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

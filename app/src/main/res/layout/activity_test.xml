@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <!-- 工具栏 -->
+<androidx.appcompat.widget.Toolbar
+android:id="@+id/toolbar"
+android:layout_width="match_parent"
+android:layout_height="?attr/actionBarSize"
+android:background="?attr/colorPrimary"
+android:theme="?attr/actionBarTheme"
+android:elevation="4dp">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="心理测试"
+    android:textColor="@android:color/white"
+    android:textSize="20sp"
+    android:textStyle="bold" />
+
+</androidx.appcompat.widget.Toolbar>
+
+    <!-- 内容区域 -->
+<ScrollView
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="20dp">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <!-- 测试图标 -->
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="📊"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:background="@drawable/bg_test_icon"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp" />
+
+    <!-- 测试标题 -->
+    <TextView
+        android:id="@+id/tvTestTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="心理健康自测"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 测试描述 -->
+    <TextView
+        android:id="@+id/tvTestDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="通过专业量表评估当前的心理压力和情绪状态，了解自己的心理健康水平。"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:lineSpacingMultiplier="1.4"
+        android:gravity="center"
+        android:layout_marginBottom="30dp" />
+
+    <!-- 测试信息卡片 -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="测试信息"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⏱️"
+                android:textSize="14sp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="测试时长：约5-10分钟"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="❓"
+                android:textSize="14sp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="题目数量：20道选择题"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔒"
+                android:textSize="14sp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="隐私保护：结果仅自己可见"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
+<!-- 开始测试按钮 -->
+<Button
+    android:id="@+id/btnStartTest"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="开始测试"
+    android:textSize="16sp"
+    android:textColor="@android:color/white"
+    android:background="@drawable/bg_button_primary"
+    android:paddingVertical="14dp"
+    android:layout_marginTop="20dp" />
+
+<!-- 功能提示 -->
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="心理测试功能开发中，敬请期待..."
+    android:textSize="14sp"
+    android:textColor="@android:color/darker_gray"
+    android:gravity="center"
+    android:layout_marginTop="40dp" />
+
+</LinearLayout>
+
+    </ScrollView>
+
+    </LinearLayout>
