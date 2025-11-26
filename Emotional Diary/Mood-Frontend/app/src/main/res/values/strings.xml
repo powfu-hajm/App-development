@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">情绪日记</string>
+    <string name="diary">写日记</string>
+    <string name="history">历史日记</string>
+    <string name="chart">情绪图表</string>
+    <string name="save_diary">保存日记</string>
+    <string name="select_mood">选择心情（最多2个）</string>
+    <string name="select_reason">选择原因（最多3个）</string>
+    <string name="write_something">写点什么...</string>
+    <string name="diary_saved">日记保存成功</string>
+    <string name="select_at_least_one_mood">请至少选择一个心情</string>
+    <string name="write_something_today">请写点什么记录今天的心情</string>
+    <string name="max_characters">最多只能输入45个字符</string>
+    <string name="max_moods">最多只能选择2个心情</string>
+    <string name="max_reasons">最多只能选择3个原因</string>
+</resources>

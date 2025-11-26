@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.emotionbackend.mapper.DiaryMapper">
+
+    <resultMap id="MoodChartResultMap" type="org.example.emotionbackend.dto.MoodChartDTO">
+        <result property="date" column="date"/>
+        <result property="mood" column="mood"/>
+        <result property="count" column="count"/>
+    </resultMap>
+
+    <select id="selectMoodChartData" resultMap="MoodChartResultMap">
+        SELECT
+            DATE(create_time) as date,
+            mood_tag as mood,
+            COUNT(*) as count
+        FROM diary
+        WHERE user_id = #{userId}
+          AND deleted = 0
+          AND create_time >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+        GROUP BY DATE(create_time), mood_tag
+        ORDER BY date ASC
+    </select>
+
+    <!-- 修复：确保更新时间被正确设置 -->
+    <update id="updateDiaryWithTime">
+        UPDATE diary
+        SET content = #{content},
+            mood_tag = #{moodTag},
+            update_time = NOW()
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+
+</mapper>

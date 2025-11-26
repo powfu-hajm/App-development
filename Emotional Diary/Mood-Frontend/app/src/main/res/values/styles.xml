@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 基础应用主题 -->
+    <style name="Theme.QXB" parent="Theme.Material3.DayNight">
+        <!-- 主色 -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- 次要色 -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- 背景色 -->
+        <item name="android:windowBackground">@color/white</item>
+
+        <!-- 如果需要支持暗色模式，在 values-night/styles.xml 中也定义 -->
+    </style>
+
+    <!-- 启动页主题（无ActionBar） -->
+    <style name="Theme.QXB.Launcher" parent="Theme.QXB">
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="RoundedButton" parent="Widget.Material3.Button">
+        <!-- 圆角半径 -->
+        <item name="cornerRadius">16dp</item>
+        <!-- 背景颜色 -->
+        <item name="backgroundTint">@color/primary_blue</item>
+        <!-- 文字颜色 -->
+        <item name="android:textColor">@color/white</item>
+        <!-- 内边距 -->
+        <item name="android:padding">12dp</item>
+        <!-- 其他自定义属性 -->
+    </style>
+
+
+</resources>
