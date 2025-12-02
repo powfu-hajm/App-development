@@ -49,6 +49,10 @@
     <color name="primary_blue_50">#804A90E2</color>
     <color name="accent_orange_50">#80FF9800</color>
 
-
+    <!-- 测试结果颜色 -->
+    <color name="result_normal">#4CAF50</color>
+    <color name="result_mild">#FFC107</color>
+    <color name="result_moderate">#FF9800</color>
+    <color name="result_severe">#F44336</color>
 
 </resources>

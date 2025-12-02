@@ -70,6 +70,16 @@
             android:theme="@style/Theme.QXB"
             android:exported="false" />
 
+        <!-- 心理测试相关活动 -->
+        <activity
+            android:name=".TestQuestionActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".TestResultActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="false" />
+
     </application>
 
 </manifest>
