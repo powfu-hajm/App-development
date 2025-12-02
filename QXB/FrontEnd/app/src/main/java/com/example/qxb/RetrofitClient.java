@@ -7,11 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.concurrent.TimeUnit;
 
 public class RetrofitClient {
-    // 简化配置：直接使用电脑IP
-//    private static final String BASE_URL = "http://10.101.135.249:8080/api/";
+    // 真机调试：使用电脑局域网IP
+    private static final String BASE_URL = "http://192.168.1.108:8080/api/";
 
-    // 如果需要切换环境，可以在这里注释/取消注释
-    private static final String BASE_URL = "http://10.0.2.2:8080/api/"; // 模拟器
+    // 模拟器调试时使用下面这行（注释上面，取消注释下面）
+    // private static final String BASE_URL = "http://10.0.2.2:8080/api/";
 
     private static Retrofit retrofit = null;
 
