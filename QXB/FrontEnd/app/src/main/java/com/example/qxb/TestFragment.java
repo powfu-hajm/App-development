@@ -47,24 +47,24 @@ public class TestFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        // MBTI测试（暂未实现）
+        // MBTI测试（paperId=4）
         btnMbtiTest.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "MBTI人格测试开发中...", Toast.LENGTH_SHORT).show();
+            startTestActivity(4L);
         });
 
-        // 抑郁自评量表（已实现，paperId=1）
+        // 抑郁自评量表（paperId=1）
         btnDepressionTest.setOnClickListener(v -> {
             startTestActivity(1L);
         });
 
-        // 焦虑自评量表（暂未实现）
+        // 焦虑自评量表（paperId=2）
         btnAnxietyTest.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "焦虑自评量表开发中...", Toast.LENGTH_SHORT).show();
+            startTestActivity(2L);
         });
 
-        // 压力评估测试（暂未实现）
+        // 压力评估测试（paperId=3）
         btnStressTest.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "压力评估测试开发中...", Toast.LENGTH_SHORT).show();
+            startTestActivity(3L);
         });
     }
 

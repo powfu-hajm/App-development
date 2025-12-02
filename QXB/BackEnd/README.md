@@ -13,9 +13,15 @@
 mysql -u root -p
 CREATE DATABASE IF NOT EXISTS mood_diary CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE mood_diary;
-SOURCE src/main/resources/diary_table.sql;
-SOURCE src/main/resources/test_tables.sql;
+SOURCE /绝对路径/QXB/BackEnd/src/main/resources/diary_table.sql
+SOURCE /绝对路径/QXB/BackEnd/src/main/resources/test_tables.sql
 ```
+
+验证：
+```sql
+SELECT id, title, question_count FROM test_paper;
+```
+应显示4个量表（SDS、SAS、PSS、MBTI）。
 
 ### 2. 配置数据库密码
 
