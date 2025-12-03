@@ -1,0 +1,5 @@
+com\qxb\backend\dto\ChatResponse.class
+com\qxb\backend\BackendApplication.class
+com\qxb\backend\controller\AIController.class
+com\qxb\backend\dto\ChatRequest.class
+com\qxb\backend\service\AIService.class
