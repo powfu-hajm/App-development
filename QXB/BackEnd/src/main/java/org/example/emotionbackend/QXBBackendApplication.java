@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("org.example.emotionbackend.mapper")
-public class EmotionBackendApplication {
+public class QXBBackendApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EmotionBackendApplication.class, args);
+        SpringApplication.run(QXBBackendApplication.class, args);
     }
+
 }

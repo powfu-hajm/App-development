@@ -1,4 +1,4 @@
-package com.qxb.backend.dto;
+package org.example.emotionbackend.dto;
 
 import lombok.Data;
 

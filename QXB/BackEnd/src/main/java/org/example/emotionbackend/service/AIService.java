@@ -1,4 +1,4 @@
-package com.qxb.backend.service;
+package org.example.emotionbackend.service;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;

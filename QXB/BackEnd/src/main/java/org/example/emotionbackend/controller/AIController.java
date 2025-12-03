@@ -1,8 +1,9 @@
-package com.qxb.backend.controller;
+package org.example.emotionbackend.controller;
 
-import com.qxb.backend.dto.ChatRequest;
-import com.qxb.backend.dto.ChatResponse;
-import com.qxb.backend.service.AIService;
+import org.example.emotionbackend.dto.ChatRequest;
+import org.example.emotionbackend.dto.ChatResponse;
+import org.example.emotionbackend.service.AIService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
