@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 主项目菜单 -->
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_psychology"
+        android:title="首页" />
+
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/ic_chat_bubble"
+        android:title="AI倾诉" />
+
+    <item
+        android:id="@+id/nav_diary"
+        android:icon="@drawable/ic_diary_book"
+        android:title="心情日记" />
+
+    <item
+        android:id="@+id/nav_test"
+        android:icon="@drawable/ic_fragment_questionaire"
+        android:title="心理测试" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_profile_user"
+        android:title="我的" />
+
+    <!-- Mood模块的菜单项（可选） -->
+    <item
+        android:id="@+id/navigation_history"
+        android:icon="@drawable/ic_history"
+        android:title="历史记录"
+        android:visible="false" />  <!-- 默认隐藏 -->
+
+    <item
+        android:id="@+id/navigation_chart"
+        android:icon="@drawable/ic_table"
+        android:title="心情图表"
+        android:visible="false" />  <!-- 默认隐藏 -->
+</menu>
