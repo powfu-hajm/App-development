@@ -189,6 +189,12 @@ public class TestQuestionActivity extends AppCompatActivity {
     }
 
     private void goToPreviousQuestion() {
+        // 检查数据是否已加载
+        if (paperDetail == null || paperDetail.getQuestions() == null) {
+            Toast.makeText(this, "数据加载中，请稍候...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         saveCurrentAnswer();
         if (currentQuestionIndex > 0) {
             displayQuestion(currentQuestionIndex - 1);
@@ -196,6 +202,12 @@ public class TestQuestionActivity extends AppCompatActivity {
     }
 
     private void goToNextQuestion() {
+        // 检查数据是否已加载
+        if (paperDetail == null || paperDetail.getQuestions() == null) {
+            Toast.makeText(this, "数据加载中，请稍候...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         saveCurrentAnswer();
 
         // 检查是否选择了答案

@@ -8,10 +8,10 @@ import java.util.concurrent.TimeUnit;
 
 public class RetrofitClient {
     // 真机调试：使用电脑局域网IP
-    private static final String BASE_URL = "http://192.168.1.108:8080/api/";
+    // private static final String BASE_URL = "http://192.168.1.108:8080/api/";
 
-    // 模拟器调试时使用下面这行（注释上面，取消注释下面）
-    // private static final String BASE_URL = "http://10.0.2.2:8080/api/";
+    // 模拟器调试时使用下面这行
+    private static final String BASE_URL = "http://10.0.2.2:8080/api/";
 
     private static Retrofit retrofit = null;
 
