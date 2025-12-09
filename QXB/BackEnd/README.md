@@ -14,6 +14,7 @@ cd QXB/BackEnd/src/main/resources
 mysql -u root -p
 ```
 
+数据库mood_diary配置：每一行输入后都要换行
 ```sql
 CREATE DATABASE IF NOT EXISTS mood_diary CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE mood_diary;
@@ -62,38 +63,6 @@ Windows：
 mvnw.cmd spring-boot:run
 ```
 
-### 5. 查看本机局域网 IP
-
-Mac/Linux：
-```
-ifconfig | grep "inet " | grep -v 127.0.0.1
-```
-
-Windows：
-```
-ipconfig
-```
-找 `IPv4 地址`，通常为 `192.168.x.x`
-
-### 6. 配置 Android 端
-
-修改 `FrontEnd/app/src/main/java/com/example/qxb/RetrofitClient.java`：
-```java
-private static final String BASE_URL = "http://你的IP:8080/api/";
-```
-
-修改 `FrontEnd/app/src/main/res/xml/network_security_config.xml`：
-```xml
-<domain includeSubdomains="true">你的IP</domain>
-```
-
-### 7. 验证
-
-后端：访问 http://localhost:8080/api/test/papers 返回 JSON 即成功。
-
-前后端互通：手机和电脑连同一 WiFi，手机浏览器访问 http://你的IP:8080/api/test/papers 返回 JSON 即成功。
-
----
 
 ## API 接口文档
 
