@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- 移除图标，只显示文字，这样会显示为三个点 -->
+    <item
+        android:id="@+id/menu_history"
+        android:title="历史日记"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_chart"
+        android:title="情绪图表"
+        app:showAsAction="never" />
+
+</menu>
