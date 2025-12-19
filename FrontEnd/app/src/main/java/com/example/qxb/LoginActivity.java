@@ -3,7 +3,6 @@ package com.example.qxb;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,6 +10,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.qxb.models.network.ApiResponse;
+import com.example.qxb.models.dto.LoginDTO;
+import com.example.qxb.models.dto.LoginResult;
+import com.example.qxb.RetrofitClient;
 import com.example.qxb.utils.SessionManager;
 
 import retrofit2.Call;
@@ -79,39 +81,54 @@ public class LoginActivity extends AppCompatActivity {
 
         // 禁用按钮防止重复点击
         btnLogin.setEnabled(false);
-        Toast.makeText(this, "登录中...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, "登录中...", Toast.LENGTH_SHORT).show();
 
-        LoginRequest request = new LoginRequest(username, password);
-        apiService.login(request).enqueue(new Callback<ApiResponse<String>>() {
-    @Override
-            public void onResponse(Call<ApiResponse<String>> call, Response<ApiResponse<String>> response) {
+        LoginDTO dto = new LoginDTO(username, password);
+
+        apiService.login(dto).enqueue(new Callback<ApiResponse<LoginResult>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<LoginResult>> call,
+                                   Response<ApiResponse<LoginResult>> response) {
+
                 btnLogin.setEnabled(true);
-                if (response.isSuccessful() && response.body() != null) {
-                    ApiResponse<String> apiResponse = response.body();
-                    if (apiResponse.getCode() == 200) {
-                        String token = apiResponse.getData();
-                        // 1. 保存 Token
-                        sessionManager.saveSession(token, username);
-                        // 2. 设置 Retrofit 全局 Token
-                        RetrofitClient.authToken = token;
-                        // 3. 跳转主页
-                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        finish();
-                    } else {
-                        Toast.makeText(LoginActivity.this, "登录失败: " + apiResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(LoginActivity.this, "服务器错误: " + response.code(), Toast.LENGTH_SHORT).show();
+
+                if (!response.isSuccessful()) {
+                    Toast.makeText(LoginActivity.this,
+                            "服务器异常: " + response.code(),
+                            Toast.LENGTH_SHORT).show();
+                    return;
                 }
-    }
 
-    @Override
-            public void onFailure(Call<ApiResponse<String>> call, Throwable t) {
+                ApiResponse<LoginResult> body = response.body();
+                if (body == null) {
+                    Toast.makeText(LoginActivity.this,
+                            "响应为空",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!body.isSuccess()) {
+                    Toast.makeText(LoginActivity.this,
+                            body.getMessage(),
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 取 Token
+                String token = body.getData().getToken();
+                Toast.makeText(LoginActivity.this,
+                        "登录成功 Token：" + token,
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<LoginResult>> call, Throwable t) {
                 btnLogin.setEnabled(true);
-                Toast.makeText(LoginActivity.this, "网络错误: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("Login", "Login failed", t);
+                Toast.makeText(LoginActivity.this,
+                        "请求失败：" + t.getMessage(),
+                        Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }

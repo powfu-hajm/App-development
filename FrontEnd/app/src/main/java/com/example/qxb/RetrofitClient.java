@@ -12,7 +12,10 @@ public class RetrofitClient {
     public static String BASE_URL = null;
 
     private static Retrofit retrofit = null;
-    
+    public static void reset() {
+        retrofit = null;
+    }
+
     // 全局 Token 缓存
     public static String authToken = null;
 
@@ -32,7 +35,7 @@ public class RetrofitClient {
                     Log.d("NetworkDebug", "使用模拟器地址: " + BASE_URL);
                 } else {
                     // 真机使用电脑局域网IP，请根据实际情况修改
-                    BASE_URL = "http://192.168.72.58:8080/api/";
+                    BASE_URL = "http://10.101.214.13:8080/api/";
                     Log.d("NetworkDebug", "使用真机地址: " + BASE_URL);
                 }
             }

@@ -1,4 +1,4 @@
-package com.example.qxb.model;
+package com.example.qxb.models;
 
 public class UserUpdateDTO {
     private String nickname;

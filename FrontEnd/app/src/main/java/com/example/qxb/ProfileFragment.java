@@ -21,9 +21,9 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.qxb.model.User;
 import com.example.qxb.models.network.ApiResponse;
 import com.example.qxb.utils.SessionManager;
+import com.example.qxb.models.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;

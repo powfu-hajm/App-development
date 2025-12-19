@@ -18,35 +18,26 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOriginPatterns("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
+                .exposedHeaders("Authorization")  // ⭐ 让前端能获取 token
                 .allowCredentials(true);
     }
 
     @Override
-    public void addResourceHandlers(org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry registry) {
-        String path = System.getProperty("user.dir");
-        // 简单处理路径，确保以 / 结尾
-        String uploadPath = "file:" + path + "/uploads/";
-        System.out.println("Static Resource Path: " + uploadPath); // 打印路径到控制台
-
-        // 将 /uploads/** 映射到本地文件系统的 uploads 目录
-        registry.addResourceHandler("/uploads/**")
-                .addResourceLocations(uploadPath);
-    }
-
-    @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
         registry.addInterceptor(tokenInterceptor)
-                .addPathPatterns("/**") // 拦截所有接口
+                .addPathPatterns("/api/**")          // ⭐只拦截API接口
                 .excludePathPatterns(
-                        "/user/login",          // 放行登录 (去掉/api)
-                        "/user/register",       // 放行注册 (去掉/api)
-                        "/article/**",          // 放行文章相关接口 (去掉/api)
-                        "/test/**",             // 放行测试接口 (本身就没有/api)
-                        "/ai/test",             // 放行测试接口
-                        "/error",               // 放行错误页面
-                        "/uploads/**",          // 放行静态资源
-                        "/v3/api-docs/**",      // 放行 Swagger 文档(如果有)
-                        "/swagger-ui/**"
+                        "/api/user/login",           // ⭐放行登录
+                        "/api/user/register",        // ⭐放行注册
+                        "/uploads/**",
+                        "/error",
+                        "/v3/api-docs/**",
+                        "/test/**", // 放行测试接口 (本身就没有/api)
+                        "/ai/test", // 放行测试接口
+                        "/swagger-ui/**",
+                        "/api/article/list"          // 若文章无需登录则放开
                 );
     }
 }
+

@@ -9,7 +9,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.qxb.models.network.ApiResponse;
-import com.example.qxb.model.User;
+import com.example.qxb.models.network.RegisterRequest;
+import com.example.qxb.models.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;

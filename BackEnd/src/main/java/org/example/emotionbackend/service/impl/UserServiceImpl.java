@@ -56,23 +56,35 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public String login(LoginDTO loginDTO) {
+
+        log.info("【收到登录请求】username = {}", loginDTO.getUsername());
+
         // 1. 查找用户
         User user = this.lambdaQuery()
                 .eq(User::getUsername, loginDTO.getUsername())
                 .one();
-        
+
         if (user == null) {
+            log.warn("【登录失败】用户不存在：{}", loginDTO.getUsername());
             throw new RuntimeException("用户不存在");
         }
 
         // 2. 校验密码
         String inputPassword = encryptPassword(loginDTO.getPassword());
+        log.info("用户输入密码 md5 = {}", inputPassword);
+
+        log.info("数据库密码 = {}", user.getPassword());
+
         if (!inputPassword.equals(user.getPassword())) {
+            log.warn("【登录失败】密码错误");
             throw new RuntimeException("密码错误");
         }
 
-        // 3. 生成 Token
-        return jwtUtils.generateToken(user.getId(), user.getUsername());
+        // 3. 生成 token
+        String token = jwtUtils.generateToken(user.getId(), user.getUsername());
+        log.info("【登录成功】生成 token: {}", token);
+
+        return token;
     }
 
     @Override

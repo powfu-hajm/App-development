@@ -24,7 +24,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.qxb.R;
 import com.example.qxb.models.network.ApiResponse;
 import com.example.qxb.models.network.Diary;
 import com.google.android.material.chip.Chip;

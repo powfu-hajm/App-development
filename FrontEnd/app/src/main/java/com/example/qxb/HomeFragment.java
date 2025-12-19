@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qxb.models.network.ApiResponse;
+import com.example.qxb.models.network.PageData;
+import com.example.qxb.models.Article;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,7 +30,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
-
+    private int page = 1;
+    private int size = 10;
     private CardView cardChat, cardDiary, cardTest;
     private RecyclerView recyclerViewArticles;
     private MultiTypeAdapter multiTypeAdapter;
@@ -149,32 +152,38 @@ public class HomeFragment extends Fragment {
         if (apiService == null) return;
 
         Log.d("HomeFragment", "开始加载文章列表...");
-        apiService.getArticles().enqueue(new Callback<ApiResponse<List<Article>>>() {
-            @Override
-            public void onResponse(Call<ApiResponse<List<Article>>> call, Response<ApiResponse<List<Article>>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    ApiResponse<List<Article>> apiResponse = response.body();
-                    if (apiResponse.isSuccess() && apiResponse.getData() != null) {
-                        List<Article> articles = apiResponse.getData();
-                        Log.e("HomeFragment", "成功获取文章，数量: " + (articles != null ? articles.size() : 0));
-                        
-                        updateContentList(articles);
-                    } else {
-                        Log.e("HomeFragment", "获取文章失败: " + apiResponse.getMessage());
+        apiService.getArticles(page, size)
+                .enqueue(new Callback<ApiResponse<PageData<Article>>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<PageData<Article>>> call,
+                                           Response<ApiResponse<PageData<Article>>> response) {
+
+                        if (response.isSuccessful() && response.body() != null) {
+
+                            ApiResponse<PageData<Article>> apiResponse = response.body();
+
+                            if (apiResponse.isSuccess() && apiResponse.getData() != null) {
+
+                                PageData<Article> pageData = apiResponse.getData();
+                                List<Article> articles = pageData.getData(); //⚠注意records字段名需对应后端JSON
+
+                                Log.d("HomeFragment", "列表大小: " + articles.size());
+
+                                updateContentList(articles);
+                            } else {
+                                loadOfflineData();
+                            }
+                        } else {
+                            loadOfflineData();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<PageData<Article>>> call, Throwable t) {
                         loadOfflineData();
                     }
-                } else {
-                    Log.e("HomeFragment", "网络请求失败: " + response.code());
-                    loadOfflineData();
-                }
-            }
+                });
 
-            @Override
-            public void onFailure(Call<ApiResponse<List<Article>>> call, Throwable t) {
-                Log.e("HomeFragment", "网络连接错误", t);
-                loadOfflineData();
-            }
-        });
     }
 
     private void updateContentList(List<Article> articles) {
@@ -182,8 +191,8 @@ public class HomeFragment extends Fragment {
 
         getActivity().runOnUiThread(() -> {
             contentList.clear();
-            
-            // 1. 添加一个固定的心理日签
+
+            // 1. 心理日签
             ContentItem dailyQuote = new ContentItem(
                     "daily_quote",
                     "心理日签",
@@ -193,8 +202,13 @@ public class HomeFragment extends Fragment {
             dailyQuote.setCategory("每日一句");
             contentList.add(dailyQuote);
 
-            // 2. 添加爬取到的文章
-            for (Article article : articles) {
+            // ⭐⭐ 2. 只保留前N条推文 ⭐⭐
+            int MAX_SHOW = 5;  // 首页最多展示 5 篇
+            List<Article> shortList =
+                    articles.size() > MAX_SHOW ? articles.subList(0, MAX_SHOW) : articles;
+
+            // 3. 添加推文到首页列表
+            for (Article article : shortList) {
                 ContentItem item = new ContentItem(
                         String.valueOf(article.getId()),
                         article.getTitle(),
@@ -204,16 +218,25 @@ public class HomeFragment extends Fragment {
                 item.setReadTime(article.getReadCount() + "阅读");
                 item.setCategory(article.getSource());
                 item.setMediaUrl(article.getOriginalUrl());
-                
+
                 contentList.add(item);
             }
 
-            // 3. 通知适配器更新
+            // ⭐⭐4. 在底部添加 “查看更多” 按钮 ⭐⭐
+            ContentItem moreItem = new ContentItem(
+                    "more_articles",
+                    "查看更多文章",
+                    "前往文章列表",
+                    "action_more"
+            );
+            contentList.add(moreItem);
+
             if (multiTypeAdapter != null) {
                 multiTypeAdapter.notifyDataSetChanged();
             }
         });
     }
+
 
     private void loadOfflineData() {
         if (getActivity() == null) return;
@@ -274,6 +297,11 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("article_content", item.getDescription());
                 intent.putExtra("read_time", "1分钟阅读");
                 intent.putExtra("category", "每日一句");
+                break;
+
+            case "action_more":
+                Intent i = new Intent(getActivity(), ArticleListActivity.class);
+                startActivity(i);
                 break;
 
             case "article":

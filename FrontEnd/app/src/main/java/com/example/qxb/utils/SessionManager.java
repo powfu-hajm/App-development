@@ -25,7 +25,7 @@ public class SessionManager {
     public void saveSession(String token, String username) {
         editor.putString(KEY_TOKEN, token);
         editor.putString(KEY_USERNAME, username);
-        editor.apply();
+        editor.commit();
     }
 
     /**
@@ -53,8 +53,9 @@ public class SessionManager {
      * 退出登录
      */
     public void logout() {
-        editor.clear();
-        editor.apply();
+        editor.remove(KEY_TOKEN);
+        editor.remove(KEY_USERNAME);
+        editor.commit();
     }
 }
 

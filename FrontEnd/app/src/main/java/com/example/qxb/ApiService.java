@@ -14,15 +14,23 @@ import retrofit2.http.Multipart;
 import retrofit2.http.Part;
 import okhttp3.MultipartBody;
 
+import com.example.qxb.model.PageResponse;
 import com.example.qxb.models.network.ApiResponse;
+import com.example.qxb.models.network.PageData;
 import com.example.qxb.models.network.Diary;
+import com.example.qxb.models.dto.LoginDTO;
+import com.example.qxb.models.dto.LoginResult;
 import com.example.qxb.models.network.MoodChartData;
+import com.example.qxb.models.network.RegisterRequest;
 import com.example.qxb.models.test.TestPaper;
 import com.example.qxb.models.test.TestPaperDetail;
 import com.example.qxb.models.test.TestResult;
 import com.example.qxb.models.test.TestSubmitRequest;
-import com.example.qxb.model.User;
-import com.example.qxb.model.UserUpdateDTO;
+import com.example.qxb.models.UserUpdateDTO;
+import com.example.qxb.models.User;
+import com.example.qxb.models.Article;
+
+
 
 import com.google.gson.annotations.SerializedName;
 
@@ -30,7 +38,7 @@ public interface ApiService {
 
     // ========== 用户相关接口 ==========
     @POST("user/login")
-    Call<ApiResponse<String>> login(@Body LoginRequest request);
+    Call<ApiResponse<LoginResult>> login(@Body LoginDTO dto);
 
     @POST("user/register")
     Call<ApiResponse<User>> register(@Body RegisterRequest request);
@@ -45,7 +53,7 @@ public interface ApiService {
     @GET("user/info")
     Call<ApiResponse<User>> getUserInfo();
 
-    // ========== 日记相关接口 ==========
+    // ========== 日记相关接口==========
     @POST("diary")
     Call<ApiResponse<Diary>> createDiary(@Body Diary diary);
 
@@ -85,36 +93,24 @@ public interface ApiService {
     Call<String> testAI();
 
     // ========== 文章相关接口 ==========
-    @GET("article/list")
-    Call<ApiResponse<List<Article>>> getArticles();
-
     @GET("article/crawl")
     Call<ApiResponse<String>> triggerCrawl();
+
+    @GET("article/page")
+    Call<PageResponse<Article>> getArticles(
+            @Query("pageNum") int pageNum,
+            @Query("pageSize") int pageSize,
+            @Query("type") int type
+    );
+    @GET("article/list")
+    Call<PageResponse<Article>> getArticleList(
+            @Query("pageNum") int pageNum,
+            @Query("pageSize") int pageSize
+    );
+
 }
 
 // ========== DTO Classes ==========
-
-class LoginRequest {
-    private String username;
-    private String password;
-
-    public LoginRequest(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-}
-
-class RegisterRequest {
-    private String username;
-    private String password;
-    private String nickname;
-
-    public RegisterRequest(String username, String password, String nickname) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-    }
-}
 
 // ChatRequest 类
 class ChatRequest {
