@@ -1,5 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
+    <!-- ===== 基础主题 (保持兼容性) ===== -->
     <style name="Base.Theme.QXB" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- 使用您的自定义颜色 -->
         <item name="colorPrimary">@color/primary_blue</item>
@@ -16,8 +17,125 @@
         <item name="materialButtonStyle">@style/Widget.Material3.Button</item>
     </style>
 
-    <!-- 完整的应用主题 -->
+    <!-- 默认主题（向后兼容） -->
     <style name="Theme.QXB" parent="Base.Theme.QXB">
         <!-- 应用级别的主题定制 -->
     </style>
+
+    <!-- ===== 蓝色主题 (默认) ===== -->
+    <style name="Theme.QXB.Blue" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary colors -->
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorPrimaryContainer">@color/primary_light_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimaryContainer">@color/primary_blue</item>
+
+        <!-- Secondary colors -->
+        <item name="colorSecondary">@color/accent_orange</item>
+        <item name="colorSecondaryContainer">@color/accent_light_orange</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnSecondaryContainer">@color/accent_orange</item>
+
+        <!-- Surface colors -->
+        <item name="colorSurface">@color/background_white</item>
+        <item name="colorSurfaceVariant">@color/background_grey</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+
+        <!-- Outline colors for dividers -->
+        <item name="colorOutline">@color/divider_grey</item>
+
+        <!-- Background -->
+        <item name="android:colorBackground">@color/background_white</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/primary_blue</item>
+        <item name="android:navigationBarColor">@color/background_white</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Material Components -->
+        <item name="chipStyle">@style/Widget.Material3.Chip.Filter</item>
+        <item name="materialButtonStyle">@style/Widget.Material3.Button</item>
+    </style>
+
+    <!-- ===== 黑色主题 ===== -->
+    <style name="Theme.QXB.Dark" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Primary colors -->
+        <item name="colorPrimary">@color/dark_primary</item>
+        <item name="colorPrimaryContainer">@color/dark_primary_container</item>
+        <item name="colorOnPrimary">@color/dark_on_primary</item>
+        <item name="colorOnPrimaryContainer">@color/dark_on_surface</item>
+
+        <!-- Secondary colors -->
+        <item name="colorSecondary">@color/dark_secondary</item>
+        <item name="colorSecondaryContainer">@color/dark_secondary_container</item>
+        <item name="colorOnSecondary">@color/dark_on_primary</item>
+        <item name="colorOnSecondaryContainer">@color/dark_on_surface</item>
+
+        <!-- Surface colors -->
+        <item name="colorSurface">@color/dark_surface</item>
+        <item name="colorSurfaceVariant">@color/dark_surface_variant</item>
+        <item name="colorOnSurface">@color/dark_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/dark_text_secondary</item>
+
+        <!-- Outline colors for dividers -->
+        <item name="colorOutline">@color/dark_divider</item>
+
+        <!-- Background -->
+        <item name="android:colorBackground">@color/dark_background</item>
+        <item name="colorOnBackground">@color/dark_on_background</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/dark_background</item>
+        <item name="android:navigationBarColor">@color/dark_navigation_bar</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Material Components -->
+        <item name="chipStyle">@style/Widget.Material3.Chip.Filter</item>
+        <item name="materialButtonStyle">@style/Widget.Material3.Button</item>
+    </style>
+
+    <!-- ===== 粉色主题 (樱花粉) ===== -->
+    <style name="Theme.QXB.Pink" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary colors -->
+        <item name="colorPrimary">@color/pink_primary</item>
+        <item name="colorPrimaryContainer">@color/pink_primary_light</item>
+        <item name="colorOnPrimary">@color/pink_on_primary</item>
+        <item name="colorOnPrimaryContainer">@color/pink_primary_dark</item>
+
+        <!-- Secondary colors -->
+        <item name="colorSecondary">@color/pink_secondary</item>
+        <item name="colorSecondaryContainer">@color/pink_secondary_container</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnSecondaryContainer">@color/pink_primary_dark</item>
+
+        <!-- Surface colors -->
+        <item name="colorSurface">@color/pink_surface</item>
+        <item name="colorSurfaceVariant">@color/pink_primary_light</item>
+        <item name="colorOnSurface">@color/pink_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+
+        <!-- Outline colors for dividers -->
+        <item name="colorOutline">@color/pink_primary_light</item>
+
+        <!-- Background -->
+        <item name="android:colorBackground">@color/pink_background</item>
+        <item name="colorOnBackground">@color/pink_on_background</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/pink_primary</item>
+        <item name="android:navigationBarColor">@color/pink_navigation_bar</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Material Components -->
+        <item name="chipStyle">@style/Widget.Material3.Chip.Filter</item>
+        <item name="materialButtonStyle">@style/Widget.Material3.Button</item>
+    </style>
+
+    <!-- ===== 启动页主题 ===== -->
+    <style name="Theme.QXB.Launcher" parent="Theme.QXB.Blue">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

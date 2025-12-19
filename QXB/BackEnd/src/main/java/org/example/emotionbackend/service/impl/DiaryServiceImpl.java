@@ -147,7 +147,7 @@ public class DiaryServiceImpl extends ServiceImpl<DiaryMapper, Diary> implements
         return result;
     }
 
-    // 新增：简化版的更新方法
+    // 简化版的更新方法
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean simpleUpdateDiary(DiaryDTO diaryDTO) {

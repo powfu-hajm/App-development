@@ -1,4 +1,3 @@
-// Diary.java (前端)
 package com.example.qxb.models.network;
 
 import com.google.gson.annotations.SerializedName;

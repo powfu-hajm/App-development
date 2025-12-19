@@ -15,6 +15,7 @@ import com.example.qxb.databinding.ActivityDiaryListBinding;
 import com.example.qxb.adapter.DiaryAdapter;
 import com.example.qxb.models.network.ApiResponse;
 import com.example.qxb.models.network.Diary;
+import com.example.qxb.widgets.EmptyStateView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +85,7 @@ public class DiaryListActivity extends AppCompatActivity {
     private void loadDiaries() {
         if (apiService == null) {
             Toast.makeText(this, "网络服务不可用", Toast.LENGTH_SHORT).show();
+            showNetworkError();
             return;
         }
 
@@ -95,19 +97,46 @@ public class DiaryListActivity extends AppCompatActivity {
                     diaryList.addAll(response.body().getData());
                     diaryAdapter.notifyDataSetChanged();
 
-                    if (diaryList.isEmpty()) {
-                        Toast.makeText(DiaryListActivity.this, "暂无日记", Toast.LENGTH_SHORT).show();
-                    }
+                    updateEmptyState();
                 } else {
                     Toast.makeText(DiaryListActivity.this, "加载失败", Toast.LENGTH_SHORT).show();
+                    showNetworkError();
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponse<List<Diary>>> call, Throwable t) {
                 Toast.makeText(DiaryListActivity.this, "网络错误: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                showNetworkError();
             }
         });
+    }
+
+    /**
+     * 更新空状态显示
+     */
+    private void updateEmptyState() {
+        if (diaryList.isEmpty()) {
+            binding.recyclerView.setVisibility(android.view.View.GONE);
+            binding.emptyStateView.setVisibility(android.view.View.VISIBLE);
+            binding.emptyStateView.setEmptyType(EmptyStateView.EmptyType.NO_DIARY);
+            binding.emptyStateView.setAction("写日记", v -> {
+                finish(); // 返回主页写日记
+            });
+        } else {
+            binding.recyclerView.setVisibility(android.view.View.VISIBLE);
+            binding.emptyStateView.setVisibility(android.view.View.GONE);
+        }
+    }
+
+    /**
+     * 显示网络错误状态
+     */
+    private void showNetworkError() {
+        binding.recyclerView.setVisibility(android.view.View.GONE);
+        binding.emptyStateView.setVisibility(android.view.View.VISIBLE);
+        binding.emptyStateView.setEmptyType(EmptyStateView.EmptyType.NETWORK_ERROR);
+        binding.emptyStateView.setAction("重试", v -> loadDiaries());
     }
 
     private void deleteDiary(int position) {
@@ -141,10 +170,8 @@ public class DiaryListActivity extends AppCompatActivity {
                     // 新增：发送广播通知图表页面数据已更新
                     sendDataUpdateBroadcast();
 
-                    // 如果列表为空，显示提示
-                    if (diaryList.isEmpty()) {
-                        Toast.makeText(DiaryListActivity.this, "暂无日记", Toast.LENGTH_SHORT).show();
-                    }
+                    // 更新空状态显示
+                    updateEmptyState();
                 } else {
                     String errorMsg = "删除失败";
                     if (response.body() != null) {

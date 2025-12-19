@@ -1,3 +1,4 @@
+# application.yml
 server:
   address: 0.0.0.0
   port: 8080
@@ -5,11 +6,26 @@ server:
     context-path: /api
 
 spring:
+  profiles:
+    active: default
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mood_diary?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: 1234
+  application:
+    name: emotion-backend
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# AI 配置（优先从环境变量读取）
+ai:
+  api:
+    key: sk-58c066f855ff4656a1c39ac259cbdb2c
+  model:
+    name: qwen-turbo
 
 mybatis-plus:
   configuration:
@@ -22,6 +38,7 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
   mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: org.example.emotionbackend.entity
 
 logging:
   level:

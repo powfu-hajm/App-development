@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/system_accent1_100"
+    android:background="@color/background_grey"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
 
-        <!-- 欢迎卡片 - 添加缺失的ID -->
+        <!-- 欢迎卡片 -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +26,6 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <!-- 添加ID：tvGreeting -->
                 <TextView
                     android:id="@+id/tvGreeting"
                     android:layout_width="match_parent"
@@ -35,7 +35,6 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <!-- 添加ID：tvDate -->
                 <TextView
                     android:id="@+id/tvDate"
                     android:layout_width="match_parent"
@@ -194,118 +193,36 @@
             android:paddingTop="16dp"
             android:paddingBottom="8dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewArticles"
+        <!-- 文章列表容器 -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp" />
+            android:minHeight="200dp">
 
-        <!-- 文章卡片 - 添加点击功能 -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_daily_article"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
+            <!--
+                RecyclerView 用于显示所有文章和日签
+                nestedScrollingEnabled=false 让它把滚动权交给外层的 NestedScrollView
+            -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewArticles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="工作多年突然觉得'没意思'？或许你该寻找自己的人生主线了"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="8dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="探索职业倦怠背后的心理因素，重新发现工作的意义和价值..."
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"
-                    android:layout_marginBottom="12dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="5分钟阅读 · 心理成长"
-                    android:textSize="12sp"
-                    android:textColor="@android:color/darker_gray" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- 心理日签区域 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="心理日签"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="32dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
+            <!-- 空状态视图 -->
+            <com.example.qxb.widgets.EmptyStateView
+                android:id="@+id/emptyStateView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_gravity="center"
+                android:padding="32dp"
+                android:visibility="gone" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="09月30日"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:alpha="0.8" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="什么是真正的爱？这是我见过最好的答案"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="8dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="爱是接纳不完美，是给予自由，是在彼此陪伴中共同成长。"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:alpha="0.9"
-                    android:layout_marginTop="12dp" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        </FrameLayout>
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

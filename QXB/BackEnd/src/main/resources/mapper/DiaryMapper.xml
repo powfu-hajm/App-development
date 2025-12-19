@@ -17,7 +17,7 @@
         FROM diary
         WHERE user_id = #{userId}
           AND deleted = 0
-          AND create_time >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+          AND create_time >= DATE_SUB(CURDATE(), INTERVAL 365 DAY)
         GROUP BY DATE(create_time), mood_tag
         ORDER BY date ASC
     </select>

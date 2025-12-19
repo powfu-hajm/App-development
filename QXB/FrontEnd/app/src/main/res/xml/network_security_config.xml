@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
+    <!-- 开发环境：允许HTTP明文传输 -->
     <domain-config cleartextTrafficPermitted="true">
+        <!-- 模拟器地址 -->
         <domain includeSubdomains="true">10.0.2.2</domain>
+        <!-- 本地地址 -->
         <domain includeSubdomains="true">localhost</domain>
-        <!-- 添加您的电脑IP地址 -->
+        <!-- 你的电脑IP地址，根据实际情况修改 -->
+        <domain includeSubdomains="true">192.168.0.104</domain>
         <domain includeSubdomains="true">192.168.1.108</domain>
+        <!-- 添加其他可能用到的IP -->
+        <domain includeSubdomains="true">192.168.0.100</domain>
+        <domain includeSubdomains="true">192.168.1.100</domain>
+        <domain includeSubdomains="true">192.168.1.101</domain>
     </domain-config>
 
-    <!-- 或者使用更宽松的配置允许所有HTTP连接 -->
+    <!-- 更宽松的配置允许所有HTTP连接（开发阶段使用） -->
     <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />
+            <certificates src="user" />
         </trust-anchors>
     </base-config>
 </network-security-config>
