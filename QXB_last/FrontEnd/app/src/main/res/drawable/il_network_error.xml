@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="180dp"
+    android:height="180dp"
+    android:viewportWidth="180"
+    android:viewportHeight="180">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#FFEBEE"
+        android:pathData="M90,90m-70,0a70,70 0,1 1,140 0a70,70 0,1 1,-140 0" />
+
+    <!-- 云朵主体 -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M45,95 A25,25 0 0,1 70,70 A30,30 0 0,1 130,70 A25,25 0 0,1 130,95 L45,95 Z" />
+
+    <!-- 云朵底部 -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M45,95 L130,95 Q135,95 135,100 L135,105 Q135,110 130,110 L45,110 Q40,110 40,105 L40,100 Q40,95 45,95 Z" />
+
+    <!-- 叉号圆圈 -->
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M90,85 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0" />
+
+    <!-- 叉号 -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M80,75 L100,95" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M100,75 L80,95" />
+
+    <!-- 断开的连接线左 -->
+    <path
+        android:strokeColor="#BDBDBD"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M50,125 L65,125" />
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M65,125 L72,120 L72,130 Z" />
+
+    <!-- 断开的连接线右 -->
+    <path
+        android:strokeColor="#BDBDBD"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M115,125 L130,125" />
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M115,125 L108,120 L108,130 Z" />
+
+    <!-- 断开标志 -->
+    <path
+        android:strokeColor="#F44336"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M82,125 L98,125" />
+    <path
+        android:strokeColor="#F44336"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M85,120 L95,130" />
+
+</vector>

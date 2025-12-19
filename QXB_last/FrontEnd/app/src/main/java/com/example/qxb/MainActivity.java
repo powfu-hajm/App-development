@@ -2,11 +2,14 @@ package com.example.qxb;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+
+import android.content.res.ColorStateList;
+
+import androidx.core.content.ContextCompat;
 
 import com.example.qxb.DiaryFragment;
 import com.example.qxb.HomeFragment;
@@ -14,9 +17,10 @@ import com.example.qxb.ChatFragment;
 import com.example.qxb.TestFragment;
 import com.example.qxb.ProfileFragment;
 import com.example.qxb.utils.SessionManager;
+import com.example.qxb.utils.ThemeManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private BottomNavigationView bottomNavigationView;
     private SessionManager sessionManager;
@@ -52,6 +56,42 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        // 根据当前主题设置底部导航栏颜色
+        setupBottomNavColors();
+    }
+
+    private void setupBottomNavColors() {
+        ThemeManager themeManager = new ThemeManager(this);
+        int currentTheme = themeManager.getCurrentTheme();
+
+        int iconColorResId;
+        int rippleColorResId;
+
+        switch (currentTheme) {
+            case ThemeManager.THEME_DARK:
+                iconColorResId = R.color.bottom_nav_icon_color_dark;
+                rippleColorResId = R.color.bottom_nav_ripple_dark;
+                break;
+            case ThemeManager.THEME_PINK:
+                iconColorResId = R.color.bottom_nav_icon_color_pink;
+                rippleColorResId = R.color.bottom_nav_ripple_pink;
+                break;
+            case ThemeManager.THEME_BLUE:
+            default:
+                iconColorResId = R.color.bottom_nav_icon_color_blue;
+                rippleColorResId = R.color.bottom_nav_ripple_blue;
+                break;
+        }
+
+        // 设置图标和文字颜色
+        ColorStateList iconColorStateList = ContextCompat.getColorStateList(this, iconColorResId);
+        bottomNavigationView.setItemIconTintList(iconColorStateList);
+        bottomNavigationView.setItemTextColor(iconColorStateList);
+
+        // 设置更柔和、更小的涟漪效果
+        ColorStateList rippleColorStateList = ContextCompat.getColorStateList(this, rippleColorResId);
+        bottomNavigationView.setItemRippleColor(rippleColorStateList);
     }
 
     private void setupBottomNavigation() {
@@ -82,6 +122,12 @@ public class MainActivity extends AppCompatActivity {
         try {
             getSupportFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.fade_in,    // 进入动画
+                            R.anim.fade_out,   // 退出动画
+                            R.anim.fade_in,    // 返回时进入
+                            R.anim.fade_out    // 返回时退出
+                    )
                     .replace(R.id.fragment_container, fragment)
                     .commit();
             Log.d("FRAGMENT", "成功加载Fragment: " + fragment.getClass().getSimpleName());

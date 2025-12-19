@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qxb.models.network.ApiResponse;
+import com.example.qxb.widgets.EmptyStateView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class HomeFragment extends Fragment {
 
     private CardView cardChat, cardDiary, cardTest;
     private RecyclerView recyclerViewArticles;
+    private EmptyStateView emptyStateView;
     private MultiTypeAdapter multiTypeAdapter;
     private List<ContentItem> contentList = new ArrayList<>();
     private ApiService apiService;
@@ -61,6 +63,7 @@ public class HomeFragment extends Fragment {
         cardDiary = view.findViewById(R.id.card_diary);
         cardTest = view.findViewById(R.id.card_test);
         recyclerViewArticles = view.findViewById(R.id.recyclerViewArticles);
+        emptyStateView = view.findViewById(R.id.emptyStateView);
 
         // 安全初始化时间显示视图
         try {
@@ -181,6 +184,9 @@ public class HomeFragment extends Fragment {
         if (getActivity() == null) return;
 
         getActivity().runOnUiThread(() -> {
+            // 隐藏空状态
+            hideEmptyState();
+
             contentList.clear();
             
             // 1. 添加一个固定的心理日签
@@ -217,25 +223,45 @@ public class HomeFragment extends Fragment {
 
     private void loadOfflineData() {
         if (getActivity() == null) return;
-        
+
         getActivity().runOnUiThread(() -> {
-            contentList.clear();
-            // ... (保留之前的假数据逻辑作为备用，为了简洁这里省略部分) ...
-            ContentItem article1 = new ContentItem(
-                    "1",
-                    "工作多年突然觉得'没意思'？(离线模式)",
-                    "探索职业倦怠背后的心理因素...",
-                    "article"
-            );
-            article1.setReadTime("5分钟阅读");
-            article1.setCategory("心理成长");
-            contentList.add(article1);
-            
-            if (multiTypeAdapter != null) {
-                multiTypeAdapter.notifyDataSetChanged();
-            }
-            Toast.makeText(getContext(), "网络不佳，已加载离线内容", Toast.LENGTH_SHORT).show();
+            // 显示网络错误的空状态
+            showNetworkError();
         });
+    }
+
+    /**
+     * 显示网络错误空状态
+     */
+    private void showNetworkError() {
+        if (emptyStateView != null && recyclerViewArticles != null) {
+            recyclerViewArticles.setVisibility(View.GONE);
+            emptyStateView.setVisibility(View.VISIBLE);
+            emptyStateView.setEmptyType(EmptyStateView.EmptyType.NETWORK_ERROR);
+            emptyStateView.setAction("重新加载", v -> loadArticlesFromNetwork());
+        }
+    }
+
+    /**
+     * 显示文章为空的状态
+     */
+    private void showEmptyArticles() {
+        if (emptyStateView != null && recyclerViewArticles != null) {
+            recyclerViewArticles.setVisibility(View.GONE);
+            emptyStateView.setVisibility(View.VISIBLE);
+            emptyStateView.setEmptyType(EmptyStateView.EmptyType.NO_ARTICLE);
+            emptyStateView.setAction("刷新", v -> loadArticlesFromNetwork());
+        }
+    }
+
+    /**
+     * 隐藏空状态，显示列表
+     */
+    private void hideEmptyState() {
+        if (emptyStateView != null && recyclerViewArticles != null) {
+            emptyStateView.setVisibility(View.GONE);
+            recyclerViewArticles.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setupClickListeners() {

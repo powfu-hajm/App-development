@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="180dp"
+    android:height="180dp"
+    android:viewportWidth="180"
+    android:viewportHeight="180">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M90,90m-70,0a70,70 0,1 1,140 0a70,70 0,1 1,-140 0" />
+
+    <!-- 日记本封面 -->
+    <path
+        android:fillColor="#4A90E2"
+        android:pathData="M50,45 L120,45 Q125,45 125,50 L125,130 Q125,135 120,135 L50,135 Q45,135 45,130 L45,50 Q45,45 50,45 Z" />
+
+    <!-- 日记本书脊 -->
+    <path
+        android:fillColor="#3A7BD5"
+        android:pathData="M45,50 L55,50 L55,130 L45,130 Z" />
+
+    <!-- 日记本内页 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M55,50 L115,50 Q120,50 120,55 L120,125 Q120,130 115,130 L55,130 Z" />
+
+    <!-- 横线1 -->
+    <path
+        android:strokeColor="#E0E0E0"
+        android:strokeWidth="1.5"
+        android:pathData="M65,70 L110,70" />
+
+    <!-- 横线2 -->
+    <path
+        android:strokeColor="#E0E0E0"
+        android:strokeWidth="1.5"
+        android:pathData="M65,85 L110,85" />
+
+    <!-- 横线3 -->
+    <path
+        android:strokeColor="#E0E0E0"
+        android:strokeWidth="1.5"
+        android:pathData="M65,100 L110,100" />
+
+    <!-- 横线4 -->
+    <path
+        android:strokeColor="#E0E0E0"
+        android:strokeWidth="1.5"
+        android:pathData="M65,115 L90,115" />
+
+    <!-- 铅笔 -->
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M130,55 L140,45 L145,50 L135,60 Z" />
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M115,70 L130,55 L135,60 L120,75 Z" />
+    <path
+        android:fillColor="#FFE082"
+        android:pathData="M112,73 L115,70 L120,75 L117,78 Z" />
+    <path
+        android:fillColor="#424242"
+        android:pathData="M110,75 L112,73 L117,78 L115,80 Z" />
+
+</vector>

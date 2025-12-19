@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="180dp"
+    android:height="180dp"
+    android:viewportWidth="180"
+    android:viewportHeight="180">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#FFF3E0"
+        android:pathData="M90,90m-70,0a70,70 0,1 1,140 0a70,70 0,1 1,-140 0" />
+
+    <!-- 问卷纸张阴影 -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M55,40 L130,40 L130,145 L55,145 Z" />
+
+    <!-- 问卷纸张 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,35 L125,35 L125,140 L50,140 Z" />
+
+    <!-- 标题栏 -->
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M50,35 L125,35 L125,55 L50,55 Z" />
+
+    <!-- 标题文字线 -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:pathData="M60,45 L115,45" />
+
+    <!-- 选项1 - 未选中 -->
+    <path
+        android:strokeColor="#BDBDBD"
+        android:strokeWidth="2"
+        android:pathData="M60,70 L72,70 L72,82 L60,82 Z" />
+    <path
+        android:strokeColor="#BDBDBD"
+        android:strokeWidth="2"
+        android:pathData="M80,76 L115,76" />
+
+    <!-- 选项2 - 选中 -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M60,90 L72,90 L72,102 L60,102 Z" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2"
+        android:pathData="M63,96 L67,100 L70,92" />
+    <path
+        android:strokeColor="#BDBDBD"
+        android:strokeWidth="2"
+        android:pathData="M80,96 L115,96" />
+
+    <!-- 选项3 - 未选中 -->
+    <path
+        android:strokeColor="#BDBDBD"
+        android:strokeWidth="2"
+        android:pathData="M60,110 L72,110 L72,122 L60,122 Z" />
+    <path
+        android:strokeColor="#BDBDBD"
+        android:strokeWidth="2"
+        android:pathData="M80,116 L100,116" />
+
+    <!-- 铅笔装饰 -->
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M130,115 L140,105 L145,110 L135,120 Z" />
+    <path
+        android:fillColor="#FFE082"
+        android:pathData="M120,125 L130,115 L135,120 L125,130 Z" />
+
+</vector>

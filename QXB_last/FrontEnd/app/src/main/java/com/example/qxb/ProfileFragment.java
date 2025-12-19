@@ -24,6 +24,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.qxb.model.User;
 import com.example.qxb.models.network.ApiResponse;
 import com.example.qxb.utils.SessionManager;
+import com.example.qxb.utils.ThemeManager;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,13 +34,17 @@ import retrofit2.Response;
 public class ProfileFragment extends Fragment {
 
     private Button btnLogout;
-    private View menuConsultation, menuTests, menuDiaries, menuSettings;
+    private View menuConsultation, menuTests, menuDiaries, menuSettings, menuTheme;
     private ImageButton btnEditProfile;
-    
+
     // 新增：用户信息视图
     private ImageView ivProfileAvatar;
     private TextView tvProfileName, tvProfileId, tvProfileTime;
-    
+
+    // 主题切换相关
+    private TextView tvCurrentTheme;
+    private ThemeManager themeManager;
+
     private ApiService apiService;
 
     @Override
@@ -67,13 +73,19 @@ public class ProfileFragment extends Fragment {
         menuTests = view.findViewById(R.id.menu_tests);
         menuDiaries = view.findViewById(R.id.menu_diaries);
         menuSettings = view.findViewById(R.id.menu_settings);
+        menuTheme = view.findViewById(R.id.menu_theme);
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
-        
+
         // 绑定用户信息控件
         ivProfileAvatar = view.findViewById(R.id.ivProfileAvatar);
         tvProfileName = view.findViewById(R.id.tvProfileName);
         tvProfileId = view.findViewById(R.id.tvProfileId);
         tvProfileTime = view.findViewById(R.id.tvProfileTime);
+
+        // 主题切换相关
+        tvCurrentTheme = view.findViewById(R.id.tvCurrentTheme);
+        themeManager = new ThemeManager(getContext());
+        updateThemeDisplay();
     }
     
     private void loadUserInfo() {
@@ -155,6 +167,42 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(getActivity(), EditProfileActivity.class);
             startActivity(intent);
         });
+
+        // 主题切换
+        menuTheme.setOnClickListener(v -> showThemeDialog());
+    }
+
+    /**
+     * 显示主题选择对话框
+     */
+    private void showThemeDialog() {
+        String[] themes = ThemeManager.getThemeNames();
+        int currentTheme = themeManager.getCurrentTheme();
+
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("选择主题")
+                .setSingleChoiceItems(themes, currentTheme, (dialog, which) -> {
+                    if (which != currentTheme) {
+                        themeManager.saveTheme(which);
+                        dialog.dismiss();
+                        // 重启Activity以应用新主题
+                        ThemeManager.restartActivity(requireActivity());
+                    } else {
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .show();
+    }
+
+    /**
+     * 更新当前主题显示
+     */
+    private void updateThemeDisplay() {
+        if (tvCurrentTheme != null && themeManager != null) {
+            int currentTheme = themeManager.getCurrentTheme();
+            tvCurrentTheme.setText(ThemeManager.getThemeName(currentTheme));
+        }
     }
 
     private void logout() {

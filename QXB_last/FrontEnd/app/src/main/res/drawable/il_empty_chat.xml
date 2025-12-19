@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="180dp"
+    android:height="180dp"
+    android:viewportWidth="180"
+    android:viewportHeight="180">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#E8F5E9"
+        android:pathData="M90,90m-70,0a70,70 0,1 1,140 0a70,70 0,1 1,-140 0" />
+
+    <!-- 左侧聊天气泡 -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M40,60 L95,60 Q100,60 100,65 L100,95 Q100,100 95,100 L55,100 L45,115 L45,100 L45,100 Q40,100 40,95 L40,65 Q40,60 45,60 Z" />
+
+    <!-- 左气泡省略号 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M55,80 m-4,0 a4,4 0 1,1 8,0 a4,4 0 1,1 -8,0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M70,80 m-4,0 a4,4 0 1,1 8,0 a4,4 0 1,1 -8,0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M85,80 m-4,0 a4,4 0 1,1 8,0 a4,4 0 1,1 -8,0" />
+
+    <!-- 右侧聊天气泡 -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M80,75 L135,75 Q140,75 140,80 L140,110 Q140,115 135,115 L135,115 L135,130 L120,115 L85,115 Q80,115 80,110 L80,80 Q80,75 85,75 Z" />
+
+    <!-- 右气泡问号 -->
+    <path
+        android:fillColor="#757575"
+        android:pathData="M105,88 Q105,84 108,82 Q111,80 114,82 Q117,84 117,88 Q117,91 114,93 L111,95 L111,99 L107,99 L107,95 Q107,92 110,90 Q112,89 112,87 Q112,85 110,85 Q108,85 108,88 L105,88 Z M107,103 L111,103 L111,107 L107,107 Z" />
+
+    <!-- 小装饰气泡 -->
+    <path
+        android:fillColor="#A5D6A7"
+        android:pathData="M125,50 m-8,0 a8,8 0 1,1 16,0 a8,8 0 1,1 -16,0" />
+    <path
+        android:fillColor="#C8E6C9"
+        android:pathData="M50,125 m-6,0 a6,6 0 1,1 12,0 a6,6 0 1,1 -12,0" />
+
+</vector>

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qxb.adapter.ChatAdapter;
 import com.example.qxb.models.network.ApiResponse;
+import com.example.qxb.widgets.EmptyStateView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class ChatFragment extends Fragment {
     private RecyclerView rvMessages;
     private EditText etMessage;
     private Button btnSend;
+    private EmptyStateView emptyStateView;
     private ChatAdapter chatAdapter;
     private List<ChatMessage> messageList;
     private ApiService apiService;
@@ -51,9 +53,49 @@ public class ChatFragment extends Fragment {
         rvMessages = view.findViewById(R.id.rvMessages);
         etMessage = view.findViewById(R.id.etMessage);
         btnSend = view.findViewById(R.id.btnSend);
+        emptyStateView = view.findViewById(R.id.emptyStateView);
 
         messageList = new ArrayList<>();
         Log.d("ChatDebug", "初始化完成，消息列表大小: " + messageList.size());
+
+        // 显示初始欢迎引导
+        showWelcomeGuide();
+    }
+
+    /**
+     * 显示欢迎引导空状态
+     */
+    private void showWelcomeGuide() {
+        if (emptyStateView != null) {
+            emptyStateView.setVisibility(View.VISIBLE);
+            emptyStateView.setEmptyType(EmptyStateView.EmptyType.NO_CHAT);
+            emptyStateView.setAction("开始聊天", v -> {
+                hideEmptyState();
+                etMessage.requestFocus();
+            });
+        }
+    }
+
+    /**
+     * 显示网络错误空状态
+     */
+    private void showNetworkError() {
+        if (emptyStateView != null && rvMessages != null) {
+            rvMessages.setVisibility(View.GONE);
+            emptyStateView.setVisibility(View.VISIBLE);
+            emptyStateView.setEmptyType(EmptyStateView.EmptyType.NETWORK_ERROR);
+            emptyStateView.setAction("重试", v -> loadChatHistory());
+        }
+    }
+
+    /**
+     * 隐藏空状态
+     */
+    private void hideEmptyState() {
+        if (emptyStateView != null && rvMessages != null) {
+            emptyStateView.setVisibility(View.GONE);
+            rvMessages.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initApiService() {
@@ -99,7 +141,12 @@ public class ChatFragment extends Fragment {
                     if (apiResponse.getCode() == 200 && apiResponse.getData() != null) {
                         List<ChatHistoryMessage> history = apiResponse.getData();
                         Log.d("ChatDebug", "获取历史记录成功，条数: " + history.size());
-                        
+
+                        // 有历史记录时隐藏空状态
+                        if (history.size() > 0) {
+                            hideEmptyState();
+                        }
+
                         messageList.clear();
                         // 1. 添加欢迎语
                         messageList.add(new ChatMessage(
@@ -141,6 +188,9 @@ public class ChatFragment extends Fragment {
             Toast.makeText(getContext(), "网络服务未初始化", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        // 发送消息时隐藏空状态
+        hideEmptyState();
 
         // 添加用户消息到列表
         ChatMessage userMessage = new ChatMessage(message, ChatMessage.TYPE_USER, System.currentTimeMillis());

@@ -193,18 +193,35 @@
             android:paddingTop="16dp"
             android:paddingBottom="8dp" />
 
-        <!-- 
-            RecyclerView 用于显示所有文章和日签 
-            nestedScrollingEnabled=false 让它把滚动权交给外层的 NestedScrollView
-        -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewArticles"
+        <!-- 文章列表容器 -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="8dp"
-            android:nestedScrollingEnabled="false"
-            android:overScrollMode="never" />
+            android:minHeight="200dp">
+
+            <!--
+                RecyclerView 用于显示所有文章和日签
+                nestedScrollingEnabled=false 让它把滚动权交给外层的 NestedScrollView
+            -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewArticles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never" />
+
+            <!-- 空状态视图 -->
+            <com.example.qxb.widgets.EmptyStateView
+                android:id="@+id/emptyStateView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="32dp"
+                android:visibility="gone" />
+
+        </FrameLayout>
 
     </LinearLayout>
 
