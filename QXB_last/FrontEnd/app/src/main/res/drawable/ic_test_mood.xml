@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="80dp"
+    android:height="80dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="?attr/colorPrimaryContainer"
+        android:pathData="M12,12m-11,0a11,11 0,1 1,22 0a11,11 0,1 1,-22 0" />
+
+    <!-- 表情圆脸 -->
+    <path
+        android:fillColor="?attr/colorPrimary"
+        android:pathData="M12,12m-7,0a7,7 0,1 1,14 0a7,7 0,1 1,-14 0" />
+
+    <!-- 左眼 -->
+    <path
+        android:fillColor="?attr/colorOnPrimary"
+        android:pathData="M9,10m-1,0a1,1 0,1 1,2 0a1,1 0,1 1,-2 0" />
+
+    <!-- 右眼 -->
+    <path
+        android:fillColor="?attr/colorOnPrimary"
+        android:pathData="M15,10m-1,0a1,1 0,1 1,2 0a1,1 0,1 1,-2 0" />
+
+    <!-- 微笑嘴巴 -->
+    <path
+        android:strokeColor="?attr/colorOnPrimary"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M8.5,14 Q12,17 15.5,14" />
+
+</vector>

@@ -66,21 +66,21 @@ public class MainActivity extends BaseActivity {
         int currentTheme = themeManager.getCurrentTheme();
 
         int iconColorResId;
-        int rippleColorResId;
+        int rippleDrawableResId;
 
         switch (currentTheme) {
             case ThemeManager.THEME_DARK:
                 iconColorResId = R.color.bottom_nav_icon_color_dark;
-                rippleColorResId = R.color.bottom_nav_ripple_dark;
+                rippleDrawableResId = R.drawable.ripple_bottom_nav_dark;
                 break;
             case ThemeManager.THEME_PINK:
                 iconColorResId = R.color.bottom_nav_icon_color_pink;
-                rippleColorResId = R.color.bottom_nav_ripple_pink;
+                rippleDrawableResId = R.drawable.ripple_bottom_nav_pink;
                 break;
             case ThemeManager.THEME_BLUE:
             default:
                 iconColorResId = R.color.bottom_nav_icon_color_blue;
-                rippleColorResId = R.color.bottom_nav_ripple_blue;
+                rippleDrawableResId = R.drawable.ripple_bottom_nav_blue;
                 break;
         }
 
@@ -89,9 +89,9 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.setItemIconTintList(iconColorStateList);
         bottomNavigationView.setItemTextColor(iconColorStateList);
 
-        // 设置更柔和、更小的涟漪效果
-        ColorStateList rippleColorStateList = ContextCompat.getColorStateList(this, rippleColorResId);
-        bottomNavigationView.setItemRippleColor(rippleColorStateList);
+        // 设置更小的圆形涟漪效果 (48dp bounded oval)
+        bottomNavigationView.setItemRippleColor(null); // 禁用默认涟漪
+        bottomNavigationView.setItemBackgroundResource(rippleDrawableResId);
     }
 
     private void setupBottomNavigation() {

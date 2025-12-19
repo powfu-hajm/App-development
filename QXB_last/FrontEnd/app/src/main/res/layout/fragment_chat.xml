@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_grey">
+    android:background="?attr/colorSurfaceVariant">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary_blue"
+        android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <TextView
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="@color/background_white">
+        android:background="?attr/colorSurface">
 
         <EditText
             android:id="@+id/etMessage"
@@ -72,7 +72,7 @@
             android:layout_marginStart="8dp"
             android:text="@string/send_button"
             android:textColor="@android:color/white"
-            android:backgroundTint="@android:color/holo_blue_dark"/>
+            android:backgroundTint="?attr/colorPrimary"/>
 
     </LinearLayout>
 </LinearLayout>

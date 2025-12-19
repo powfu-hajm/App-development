@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Material Design: Psychology -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="@android:color/black"
+        android:pathData="M19.94,9.06C19.5,5.73 16.57,3 13,3C9.47,3 6.57,5.61 6.08,9L1,9v2h5.07c0.48,3.61 3.43,6.43 7.05,6.93L13.12,22h2v-4.06c0.55,-0.07 1.08,-0.21 1.59,-0.39l2.35,2.35l1.41,-1.41l-2.32,-2.32c1.04,-0.83 1.81,-1.95 2.2,-3.24L23,12.93v-2h-3.06zM13,16c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5s5,2.24 5,5s-2.24,5 -5,5z"/>
+    <path
+        android:fillColor="@android:color/black"
+        android:pathData="M12.5,8l-1.5,0l0,3.5l-2.5,0l0,1.5l4,0z"/>
+</vector>
