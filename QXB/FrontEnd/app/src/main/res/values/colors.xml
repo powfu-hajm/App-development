@@ -78,6 +78,10 @@
     <color name="button_primary_bg">#1A1A1A</color>
     <color name="button_primary_text">#FFFFFF</color>
 
+    <!-- ===== 选项颜色 ===== -->
+    <color name="option_normal_bg">#FFFFFF</color>
+    <color name="option_selected_bg">#F0F0F0</color>
+
     <!-- ===== 旧颜色兼容 (将逐步移除) ===== -->
     <color name="primary_blue">#1A1A1A</color>
     <color name="primary_light_blue">#F5F5F5</color>
