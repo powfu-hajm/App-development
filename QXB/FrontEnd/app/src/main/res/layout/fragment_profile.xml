@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurfaceVariant"
+    android:background="@android:color/system_accent1_100"
     android:fillViewport="true">
 
     <LinearLayout
@@ -42,10 +42,20 @@
                         android:id="@+id/tvProfileName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="xxx"
-                        android:textSize="20sp"
-                        android:textColor="?attr/colorOnSurface"
+                        android:text="用户名: xxx"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_primary"
                         android:textStyle="bold" />
+
+                    <!-- 新增：昵称显示 -->
+                    <TextView
+                        android:id="@+id/tvProfileNickname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="昵称: xxx"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginTop="4dp" />
 
                     <TextView
                         android:id="@+id/tvProfileId"
@@ -53,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:text="ID: user123456"
                         android:textSize="14sp"
-                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginTop="4dp" />
 
                     <TextView
@@ -62,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:text="加入时间：2024年1月"
                         android:textSize="12sp"
-                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginTop="2dp" />
 
                 </LinearLayout>
@@ -102,11 +112,12 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/tvDiaryCount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="28"
-                        android:textColor="?attr/colorPrimary"
+                        android:text="0"
+                        android:textColor="@color/primary_blue"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -115,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:text="日记数量"
                         android:textSize="12sp"
-                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textColor="@color/text_secondary"
                         android:gravity="center" />
 
                 </LinearLayout>
@@ -123,7 +134,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="40dp"
-                    android:background="?attr/colorOutline" />
+                    android:background="@color/divider_grey" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -133,11 +144,12 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/tvTestCount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="15"
+                        android:text="0"
                         android:textSize="24sp"
-                        android:textColor="?attr/colorSecondary"
+                        android:textColor="@color/accent_orange"
                         android:textStyle="bold"
                         android:gravity="center" />
 
@@ -146,7 +158,7 @@
                         android:layout_height="wrap_content"
                         android:text="测试完成"
                         android:textSize="12sp"
-                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textColor="@color/text_secondary"
                         android:gravity="center" />
 
                 </LinearLayout>
@@ -154,7 +166,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="40dp"
-                    android:background="?attr/colorOutline" />
+                    android:background="@color/divider_grey" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -164,11 +176,12 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/tvStreakCount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="86"
+                        android:text="0"
                         android:textSize="24sp"
-                        android:textColor="?attr/colorPrimary"
+                        android:textColor="@color/primary_blue"
                         android:textStyle="bold"
                         android:gravity="center" />
 
@@ -177,7 +190,7 @@
                         android:layout_height="wrap_content"
                         android:text="连续打卡"
                         android:textSize="12sp"
-                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textColor="@color/text_secondary"
                         android:gravity="center" />
 
                 </LinearLayout>
@@ -222,7 +235,7 @@
                         android:layout_weight="1"
                         android:text="我的咨询"
                         android:textSize="16sp"
-                        android:textColor="?attr/colorOnSurface" />
+                        android:textColor="@color/text_primary" />
 
                     <ImageView
                         android:layout_width="24dp"
@@ -234,7 +247,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?attr/colorOutline" />
+                    android:background="@color/divider_grey" />
 
                 <!-- 我的测试 -->
                 <LinearLayout
@@ -257,7 +270,7 @@
                         android:layout_weight="1"
                         android:text="我的测试"
                         android:textSize="16sp"
-                        android:textColor="?attr/colorOnSurface" />
+                        android:textColor="@color/text_primary" />
 
                     <ImageView
                         android:layout_width="24dp"
@@ -269,7 +282,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?attr/colorOutline" />
+                    android:background="@color/divider_grey" />
 
                 <!-- 我的日记 -->
                 <LinearLayout
@@ -292,7 +305,7 @@
                         android:layout_weight="1"
                         android:text="我的日记"
                         android:textSize="16sp"
-                        android:textColor="?attr/colorOnSurface" />
+                        android:textColor="@color/text_primary" />
 
                     <ImageView
                         android:layout_width="24dp"
@@ -304,7 +317,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?attr/colorOutline" />
+                    android:background="@color/divider_grey" />
 
                 <!-- 设置 -->
                 <LinearLayout
@@ -327,52 +340,7 @@
                         android:layout_weight="1"
                         android:text="设置"
                         android:textSize="16sp"
-                        android:textColor="?attr/colorOnSurface" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_launcher_foreground" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?attr/colorOutline" />
-
-                <!-- 主题切换 -->
-                <LinearLayout
-                    android:id="@+id/menu_theme"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:background="?attr/selectableItemBackground">
-
-                    <ImageView
-                        android:id="@+id/ivThemeIcon"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_theme_switch"
-                        android:layout_marginEnd="16dp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="主题切换"
-                        android:textSize="16sp"
-                        android:textColor="?attr/colorOnSurface" />
-
-                    <TextView
-                        android:id="@+id/tvCurrentTheme"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="蓝色"
-                        android:textSize="14sp"
-                        android:textColor="?attr/colorPrimary"
-                        android:layout_marginEnd="8dp" />
+                        android:textColor="@color/text_primary" />
 
                     <ImageView
                         android:layout_width="24dp"
@@ -393,9 +361,22 @@
             android:text="退出登录"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="16dp"
             style="@style/RoundedButton"
             android:backgroundTint="@color/accent_orange" />
+
+        <!-- 新增：账户注销按钮 -->
+        <Button
+            android:id="@+id/btnDeleteAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="注销账户"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            style="@style/RoundedButton"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 

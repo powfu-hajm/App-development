@@ -65,7 +65,7 @@ public class MoodChartActivity extends AppCompatActivity implements OnChartValue
 
     private ActivityMoodChartBinding binding;
     private ApiService apiService;
-    // private static final Long DEFAULT_USER_ID = 1L; // 不再需要，后端会自动从Token获取
+    // 删除 DEFAULT_USER_ID 常量，因为不再需要
     private static final String TAG = "MoodChartActivity";
 
     private BroadcastReceiver dataUpdateReceiver;
@@ -243,8 +243,8 @@ public class MoodChartActivity extends AppCompatActivity implements OnChartValue
 
         Log.i(TAG, "开始加载图表数据...");
 
-        // 传入 null 即可，后端会忽略此参数并从 Token 获取当前用户 ID
-        Call<ApiResponse<List<MoodChartData>>> call = apiService.getMoodChart(null);
+        // 修复：调用无参数的getMoodChart()方法
+        Call<ApiResponse<List<MoodChartData>>> call = apiService.getMoodChart();
         call.enqueue(new Callback<ApiResponse<List<MoodChartData>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<MoodChartData>>> call, Response<ApiResponse<List<MoodChartData>>> response) {
@@ -260,7 +260,7 @@ public class MoodChartActivity extends AppCompatActivity implements OnChartValue
                                 Log.e(TAG, "DEBUG: 数据项 -> 日期: " + d.getDate() + ", 心情: " + d.getMood() + ", 数量: " + d.getCount());
                             }
                         }
-                        
+
                         updateLineChart(chartData);
                         updatePieChart(chartData);
                     } else {

@@ -29,6 +29,8 @@ public class Article implements Serializable {
 
     private Integer readCount;
 
+    private Integer type;
+
     private LocalDateTime publishTime;
 
     private LocalDateTime createTime;

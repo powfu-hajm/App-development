@@ -16,13 +16,13 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/")
+@RequestMapping("/")  // 保持根路径
 public class DiaryController {
 
     @Autowired
     private IDiaryService diaryService;
 
-    @PostMapping("/diary")
+    @PostMapping("diary")
     public Result<Diary> createDiary(@Valid @RequestBody DiaryDTO diaryDTO) {
         try {
             Long userId = UserContext.getUserId();
@@ -52,7 +52,7 @@ public class DiaryController {
         }
     }
 
-    @GetMapping("/diaries")
+    @GetMapping("diaries")
     public Result<List<Diary>> getDiaries(@RequestParam(required = false) Long userId) {
         // 忽略前端传来的 userId，强制使用当前登录用户
         Long currentUserId = UserContext.getUserId();
@@ -74,7 +74,7 @@ public class DiaryController {
         }
     }
 
-    @GetMapping("/mood-chart")
+    @GetMapping("mood-chart")
     public Result<List<MoodChartDTO>> getMoodChart(@RequestParam(required = false) Long userId) {
         Long currentUserId = UserContext.getUserId();
         if (currentUserId == null) {
@@ -91,7 +91,7 @@ public class DiaryController {
         }
     }
 
-    @DeleteMapping("/diary")
+    @DeleteMapping("diary")
     public Result<Void> deleteDiary(@RequestParam Long id) {
         Long userId = UserContext.getUserId();
         try {
@@ -117,7 +117,7 @@ public class DiaryController {
         }
     }
 
-    @PutMapping("/diary")
+    @PutMapping("diary")
     public Result<Diary> updateDiary(@Valid @RequestBody DiaryDTO diaryDTO) {
         Long userId = UserContext.getUserId();
         try {
@@ -151,7 +151,7 @@ public class DiaryController {
         }
     }
 
-    @GetMapping("/diary")
+    @GetMapping("diary")
     public Result<Diary> getDiary(@RequestParam Long id) {
         Long userId = UserContext.getUserId();
         try {

@@ -7,7 +7,7 @@
         <!-- 本地地址 -->
         <domain includeSubdomains="true">localhost</domain>
         <!-- 你的电脑IP地址，根据实际情况修改 -->
-        <domain includeSubdomains="true">192.168.0.104</domain>
+        <domain includeSubdomains="true">10.101.129.209</domain>
         <domain includeSubdomains="true">192.168.1.108</domain>
         <!-- 添加其他可能用到的IP -->
         <domain includeSubdomains="true">192.168.0.100</domain>

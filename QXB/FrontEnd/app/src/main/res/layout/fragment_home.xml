@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_grey"
+    android:background="@android:color/system_accent1_100"
     android:fillViewport="true">
 
     <LinearLayout
@@ -39,11 +39,22 @@
                     android:id="@+id/tvDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="今天是2025年09月30日"
+                    android:text="今天是2025年09月30日 星期一"
                     android:textColor="@android:color/black"
                     android:textSize="14sp"
                     android:alpha="0.8"
                     android:layout_marginTop="4dp" />
+
+                <!-- 新增：当前时间显示（实时更新） -->
+                <TextView
+                    android:id="@+id/tvCurrentTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="当前时间: 00:00:00"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -193,35 +204,18 @@
             android:paddingTop="16dp"
             android:paddingBottom="8dp" />
 
-        <!-- 文章列表容器 -->
-        <FrameLayout
+        <!--
+            RecyclerView 用于显示所有文章和日签
+            nestedScrollingEnabled=false 让它把滚动权交给外层的 NestedScrollView
+        -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewArticles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="200dp">
-
-            <!--
-                RecyclerView 用于显示所有文章和日签
-                nestedScrollingEnabled=false 让它把滚动权交给外层的 NestedScrollView
-            -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewArticles"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="8dp"
-                android:nestedScrollingEnabled="false"
-                android:overScrollMode="never" />
-
-            <!-- 空状态视图 -->
-            <com.example.qxb.widgets.EmptyStateView
-                android:id="@+id/emptyStateView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="32dp"
-                android:visibility="gone" />
-
-        </FrameLayout>
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never" />
 
     </LinearLayout>
 

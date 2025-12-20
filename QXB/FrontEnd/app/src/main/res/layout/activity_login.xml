@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="32dp"
-    android:background="?android:attr/colorBackground">
+    android:background="@android:color/white">
 
     <!-- 简化图标 -->
     <TextView
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="青心伴"
-        android:textColor="?attr/colorPrimary"
+        android:textColor="@android:color/holo_blue_dark"
         android:textSize="32sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="登录"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="@android:color/holo_blue_dark"
         android:textColor="@android:color/white"
         android:layout_marginBottom="16dp"/>
 
@@ -64,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="忘记密码？"
-        android:textColor="?attr/colorPrimary"
+        android:textColor="@android:color/holo_blue_dark"
         android:gravity="center"
         android:layout_marginTop="16dp"
         android:textSize="14sp" />

@@ -15,7 +15,6 @@ import com.example.qxb.databinding.ActivityDiaryListBinding;
 import com.example.qxb.adapter.DiaryAdapter;
 import com.example.qxb.models.network.ApiResponse;
 import com.example.qxb.models.network.Diary;
-import com.example.qxb.widgets.EmptyStateView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ public class DiaryListActivity extends AppCompatActivity {
     private DiaryAdapter diaryAdapter;
     private List<Diary> diaryList = new ArrayList<>();
     private ApiService apiService;
-    private static final Long DEFAULT_USER_ID = 1L;
+    // 删除 DEFAULT_USER_ID 常量，因为不再需要
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,11 +84,11 @@ public class DiaryListActivity extends AppCompatActivity {
     private void loadDiaries() {
         if (apiService == null) {
             Toast.makeText(this, "网络服务不可用", Toast.LENGTH_SHORT).show();
-            showNetworkError();
             return;
         }
 
-        apiService.getDiaries(DEFAULT_USER_ID).enqueue(new Callback<ApiResponse<List<Diary>>>() {
+        // 修复：移除参数，因为API接口不再需要userId参数
+        apiService.getDiaries().enqueue(new Callback<ApiResponse<List<Diary>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Diary>>> call, Response<ApiResponse<List<Diary>>> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
@@ -97,46 +96,23 @@ public class DiaryListActivity extends AppCompatActivity {
                     diaryList.addAll(response.body().getData());
                     diaryAdapter.notifyDataSetChanged();
 
-                    updateEmptyState();
+                    if (diaryList.isEmpty()) {
+                        Toast.makeText(DiaryListActivity.this, "暂无日记", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(DiaryListActivity.this, "加载失败", Toast.LENGTH_SHORT).show();
-                    showNetworkError();
+                    String errorMsg = "加载失败";
+                    if (response.body() != null) {
+                        errorMsg += ": " + response.body().getMessage();
+                    }
+                    Toast.makeText(DiaryListActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponse<List<Diary>>> call, Throwable t) {
                 Toast.makeText(DiaryListActivity.this, "网络错误: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                showNetworkError();
             }
         });
-    }
-
-    /**
-     * 更新空状态显示
-     */
-    private void updateEmptyState() {
-        if (diaryList.isEmpty()) {
-            binding.recyclerView.setVisibility(android.view.View.GONE);
-            binding.emptyStateView.setVisibility(android.view.View.VISIBLE);
-            binding.emptyStateView.setEmptyType(EmptyStateView.EmptyType.NO_DIARY);
-            binding.emptyStateView.setAction("写日记", v -> {
-                finish(); // 返回主页写日记
-            });
-        } else {
-            binding.recyclerView.setVisibility(android.view.View.VISIBLE);
-            binding.emptyStateView.setVisibility(android.view.View.GONE);
-        }
-    }
-
-    /**
-     * 显示网络错误状态
-     */
-    private void showNetworkError() {
-        binding.recyclerView.setVisibility(android.view.View.GONE);
-        binding.emptyStateView.setVisibility(android.view.View.VISIBLE);
-        binding.emptyStateView.setEmptyType(EmptyStateView.EmptyType.NETWORK_ERROR);
-        binding.emptyStateView.setAction("重试", v -> loadDiaries());
     }
 
     private void deleteDiary(int position) {
@@ -157,7 +133,7 @@ public class DiaryListActivity extends AppCompatActivity {
             return;
         }
 
-        // 调用删除API
+        // 修复：删除接口使用@Query传递参数，所以直接调用
         apiService.deleteDiary(diaryId).enqueue(new Callback<ApiResponse<Void>>() {
             @Override
             public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
@@ -170,8 +146,10 @@ public class DiaryListActivity extends AppCompatActivity {
                     // 新增：发送广播通知图表页面数据已更新
                     sendDataUpdateBroadcast();
 
-                    // 更新空状态显示
-                    updateEmptyState();
+                    // 如果列表为空，显示提示
+                    if (diaryList.isEmpty()) {
+                        Toast.makeText(DiaryListActivity.this, "暂无日记", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     String errorMsg = "删除失败";
                     if (response.body() != null) {
@@ -225,6 +203,7 @@ public class DiaryListActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
     // 添加状态栏设置方法
     private void setStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

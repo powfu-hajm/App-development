@@ -1,7 +1,6 @@
 package com.example.qxb;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,8 +18,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
-import com.example.qxb.model.User;
-import com.example.qxb.model.UserUpdateDTO;
+import com.example.qxb.models.User;
+import com.example.qxb.models.UserUpdateDTO;
 import com.example.qxb.models.network.ApiResponse;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -102,13 +101,13 @@ public class EditProfileActivity extends AppCompatActivity {
                     User user = response.body().getData();
                     if (user.getNickname() != null) etNickname.setText(user.getNickname());
                     if (user.getPhone() != null) etPhone.setText(user.getPhone());
-                    
+
                     if (user.getAvatar() != null && !user.getAvatar().isEmpty()) {
                         String fullUrl = RetrofitClient.BASE_URL.replace("/api/", "") + user.getAvatar();
                         Glide.with(EditProfileActivity.this)
-                             .load(fullUrl)
-                             .placeholder(R.drawable.ic_launcher_background)
-                             .into(ivAvatar);
+                                .load(fullUrl)
+                                .placeholder(R.drawable.ic_launcher_background)
+                                .into(ivAvatar);
                     }
                 }
             }
@@ -173,10 +172,10 @@ public class EditProfileActivity extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         String avatarUrl = response.body().getData();
                         String fullUrl = RetrofitClient.BASE_URL.replace("/api/", "") + avatarUrl;
-                         Glide.with(EditProfileActivity.this)
-                             .load(fullUrl)
-                             .into(ivAvatar);
-                         Toast.makeText(EditProfileActivity.this, "头像上传成功", Toast.LENGTH_SHORT).show();
+                        Glide.with(EditProfileActivity.this)
+                                .load(fullUrl)
+                                .into(ivAvatar);
+                        Toast.makeText(EditProfileActivity.this, "头像上传成功", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(EditProfileActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
                     }
@@ -194,7 +193,7 @@ public class EditProfileActivity extends AppCompatActivity {
         try {
             InputStream inputStream = getContentResolver().openInputStream(uri);
             if (inputStream == null) return null;
-            
+
             File tempFile = File.createTempFile("upload", ".jpg", getCacheDir());
             FileOutputStream out = new FileOutputStream(tempFile);
             byte[] buffer = new byte[1024];
@@ -223,12 +222,28 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         UserUpdateDTO dto = new UserUpdateDTO(nickname, phone, oldPwd, newPwd);
+
+        // 使用POST方法，确保与后端一致
         apiService.updateUser(dto).enqueue(new Callback<ApiResponse<User>>() {
             @Override
             public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(EditProfileActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
-                    finish();
+                    ApiResponse<User> apiResponse = response.body();
+                    if (apiResponse.isSuccess() && apiResponse.getData() != null) {
+                        Toast.makeText(EditProfileActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+
+                        // 更新MainActivity中的用户信息
+                        MainActivity mainActivity = (MainActivity) getParent();
+                        if (mainActivity != null) {
+                            mainActivity.updateCurrentUser(apiResponse.getData());
+                            mainActivity.loadUserInfo(); // 重新加载用户信息
+                        }
+
+                        finish();
+                    } else {
+                        String error = apiResponse.getMessage() != null ? apiResponse.getMessage() : "保存失败";
+                        Toast.makeText(EditProfileActivity.this, error, Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     String error = "保存失败";
                     if (response.body() != null) error = response.body().getMessage();
@@ -245,6 +260,3 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 }
-
-
-

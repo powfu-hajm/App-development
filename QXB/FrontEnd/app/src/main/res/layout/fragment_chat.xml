@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="?attr/colorSurfaceVariant">
+    android:background="@color/background_grey">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/primary_blue"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <TextView
@@ -22,33 +22,18 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMessages"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMessages"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <!-- 空状态/欢迎引导视图 -->
-        <com.example.qxb.widgets.EmptyStateView
-            android:id="@+id/emptyStateView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:padding="32dp"
-            android:visibility="gone" />
-
-    </FrameLayout>
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="?attr/colorSurface">
+        android:background="@color/background_white">
 
         <EditText
             android:id="@+id/etMessage"
@@ -72,7 +57,7 @@
             android:layout_marginStart="8dp"
             android:text="@string/send_button"
             android:textColor="@android:color/white"
-            android:backgroundTint="?attr/colorPrimary"/>
+            android:backgroundTint="@android:color/holo_blue_dark"/>
 
     </LinearLayout>
 </LinearLayout>

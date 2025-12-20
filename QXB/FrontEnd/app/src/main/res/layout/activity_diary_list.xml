@@ -4,34 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="?attr/colorSurface">
+    android:background="@android:color/system_accent1_100"
+    >
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:titleTextColor="?attr/colorOnPrimary"
-        app:navigationIconTint="?attr/colorOnPrimary" />
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp"
-            android:clipToPadding="false" />
-
-        <com.example.qxb.widgets.EmptyStateView
-            android:id="@+id/emptyStateView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="32dp"
-            android:visibility="gone" />
-
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:padding="16dp" />
 
 </LinearLayout>
