@@ -1,9 +1,12 @@
 package com.example.qxb;
 
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
@@ -94,14 +97,19 @@ public class MainActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_home) {
                 selectedFragment = new HomeFragment();
+                playNavAnimation(item, R.drawable.ic_nav_home_animated);
             } else if (itemId == R.id.nav_chat) {
                 selectedFragment = new ChatFragment();
+                playNavAnimation(item, R.drawable.ic_nav_chat_animated);
             } else if (itemId == R.id.nav_diary) {
                 selectedFragment = new DiaryFragment();
+                playNavAnimation(item, R.drawable.ic_nav_diary_animated);
             } else if (itemId == R.id.nav_test) {
                 selectedFragment = new TestFragment();
+                playNavAnimation(item, R.drawable.ic_nav_test_animated);
             } else if (itemId == R.id.nav_profile) {
                 selectedFragment = new ProfileFragment();
+                playNavAnimation(item, R.drawable.ic_nav_profile_animated);
             }
 
             if (selectedFragment != null) {
@@ -111,10 +119,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 播放导航图标动画
+     */
+    private void playNavAnimation(MenuItem item, int animatedDrawableRes) {
+        try {
+            item.setIcon(animatedDrawableRes);
+            Drawable icon = item.getIcon();
+            if (icon instanceof Animatable) {
+                ((Animatable) icon).start();
+            }
+        } catch (Exception e) {
+            Log.e("MainActivity", "播放导航动画失败: " + e.getMessage());
+        }
+    }
+
     private void loadFragment(Fragment fragment) {
         try {
             getSupportFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.fade_in,      // 进入动画
+                            R.anim.fade_out      // 退出动画
+                    )
                     .replace(R.id.fragment_container, fragment)
                     .commit();
             Log.d("FRAGMENT", "成功加载Fragment: " + fragment.getClass().getSimpleName());
