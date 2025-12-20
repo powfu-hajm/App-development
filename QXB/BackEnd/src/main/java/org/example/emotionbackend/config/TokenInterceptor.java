@@ -24,35 +24,33 @@ public class TokenInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        // 允许无需登录的接口
         String uri = request.getRequestURI();
-        if (uri.startsWith("/user/login") ||
-                uri.startsWith("/user/register") ||
-                uri.startsWith("/test")) {
-
-            return true; // 放行
-        }
-
         String token = request.getHeader("Authorization");
 
-        if (token == null || token.isEmpty()) {
-            writeError(response, "缺少Token，请先登录");
-            return false;
-        }
-
-        // 处理 Bearer 前缀
-        if (token.startsWith("Bearer ")) {
+        // 处理 Bearer 前缀并尝试解析 Token
+        if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
         }
 
-        if (!jwtUtils.validateToken(token)) {
-            writeError(response, "Token无效或已过期");
-            return false;
+        // 如果有有效 Token，解析并设置 UserContext
+        if (token != null && !token.isEmpty() && jwtUtils.validateToken(token)) {
+            Long userId = jwtUtils.getUserIdFromToken(token);
+            UserContext.setUserId(userId);
         }
 
-        // 解析并写入线程上下文
-        Long userId = jwtUtils.getUserIdFromToken(token);
-        UserContext.setUserId(userId);
+        // 完全公开的接口（不需要登录）
+        if (uri.startsWith("/user/login") ||
+                uri.startsWith("/user/register") ||
+                uri.startsWith("/test/papers") ||
+                uri.startsWith("/test/paper/")) {
+            return true; // 放行
+        }
+
+        // 需要登录的接口（包括 /test/submit 和 /test/history）
+        if (UserContext.getUserId() == null) {
+            writeError(response, "缺少Token，请先登录");
+            return false;
+        }
 
         return true;
     }

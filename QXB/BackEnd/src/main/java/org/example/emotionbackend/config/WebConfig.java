@@ -33,7 +33,6 @@ public class WebConfig implements WebMvcConfigurer {
                         "/uploads/**",
                         "/error",
                         "/v3/api-docs/**",
-                        "/test/**",
                         "/ai/test",
                         "/article/list",          // 文章列表无需登录
                         "/article/page",          // 文章分页无需登录
