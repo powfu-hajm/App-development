@@ -106,7 +106,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         String fullUrl = RetrofitClient.BASE_URL.replace("/api/", "") + user.getAvatar();
                         Glide.with(EditProfileActivity.this)
                                 .load(fullUrl)
-                                .placeholder(R.drawable.ic_launcher_background)
+                                .placeholder(R.drawable.logo)
                                 .into(ivAvatar);
                     }
                 }

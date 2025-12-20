@@ -49,10 +49,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSend"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:minHeight="44dp"
+            android:paddingHorizontal="20dp"
             android:text="@string/send_button"
-            style="@style/Widget.QXB.Button" />
+            style="@style/Widget.QXB.Button.Small" />
 
     </LinearLayout>
 </LinearLayout>

@@ -7,12 +7,12 @@
     android:padding="32dp"
     android:background="?android:attr/colorBackground">
 
-    <!-- 简化图标 -->
+    <!-- App Logo -->
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_nav_profile"
-        app:tint="@color/icon_primary"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo"
+        android:scaleType="centerCrop"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="60dp"
         android:layout_marginBottom="40dp"/>

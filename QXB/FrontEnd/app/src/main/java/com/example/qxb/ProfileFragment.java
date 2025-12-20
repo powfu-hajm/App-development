@@ -242,11 +242,11 @@ public class ProfileFragment extends Fragment {
                                 .load(avatarUrl)
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
-                                .placeholder(R.drawable.ic_profile_user)
-                                .error(R.drawable.ic_profile_user)
+                                .placeholder(R.drawable.logo)
+                                .error(R.drawable.logo)
                                 .into(ivProfileAvatar);
                     } else {
-                        ivProfileAvatar.setImageResource(R.drawable.ic_profile_user);
+                        ivProfileAvatar.setImageResource(R.drawable.logo);
                         Log.d("ProfileFragment", "使用默认头像");
                     }
                 }
