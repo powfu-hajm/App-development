@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="?android:attr/colorBackground">
 
     <!-- 工具栏 -->
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="?attr/actionBarTheme"
-        android:elevation="4dp">
+        android:background="?attr/colorSurface"
+        android:elevation="1dp"
+        app:titleCentered="true"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@color/icon_primary">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="心情日记"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
-    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <!-- 日记内容区域 -->
     <ScrollView
@@ -57,7 +61,7 @@
                     android:text="2024年01月15日"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@color/text_primary" />
 
             </LinearLayout>
 
@@ -68,7 +72,7 @@
                 android:text="今天的心情如何？"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:layout_marginBottom="12dp" />
 
             <LinearLayout
@@ -102,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:text="开心"
                         android:textSize="12sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
@@ -131,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:text="平静"
                         android:textSize="12sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
@@ -160,7 +164,7 @@
                         android:layout_height="wrap_content"
                         android:text="一般"
                         android:textSize="12sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
@@ -189,7 +193,7 @@
                         android:layout_height="wrap_content"
                         android:text="难过"
                         android:textSize="12sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
@@ -218,7 +222,7 @@
                         android:layout_height="wrap_content"
                         android:text="焦虑"
                         android:textSize="12sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
@@ -231,7 +235,7 @@
                 android:layout_height="wrap_content"
                 android:text="日记标题"
                 android:textSize="16sp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:layout_marginBottom="8dp" />
 
             <EditText
@@ -250,7 +254,7 @@
                 android:layout_height="wrap_content"
                 android:text="记录今天的心情和想法"
                 android:textSize="16sp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:layout_marginBottom="8dp" />
 
             <EditText
@@ -260,21 +264,21 @@
                 android:hint="今天发生了什么？有什么感受？..."
                 android:gravity="top"
                 android:textSize="14sp"
+                android:textColor="@color/text_primary"
                 android:background="@drawable/bg_edittext"
                 android:padding="12dp"
                 android:inputType="textMultiLine"
                 android:layout_marginBottom="24dp" />
 
             <!-- 保存按钮 -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSaveDiary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="保存日记"
                 android:textSize="16sp"
-                android:textColor="@android:color/white"
-                android:background="@drawable/bg_button"
-                android:paddingVertical="12dp" />
+                android:paddingVertical="12dp"
+                style="@style/Widget.QXB.Button" />
 
             <!-- 提示信息 -->
             <TextView
@@ -282,7 +286,7 @@
                 android:layout_height="wrap_content"
                 android:text="功能开发中，敬请期待..."
                 android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/text_hint"
                 android:gravity="center"
                 android:layout_marginTop="100dp" />
 

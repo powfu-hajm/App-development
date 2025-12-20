@@ -1,34 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
 
     <!-- 顶部标题栏 -->
-    <LinearLayout
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#FFFFFF"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="10dp">
-
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_back"
-            android:padding="4dp" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorSurface"
+        android:elevation="1dp"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@color/icon_primary">
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="推文列表"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginStart="15dp" />
-    </LinearLayout>
+            android:textColor="@color/text_primary" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
 
     <!-- 下拉刷新 + 列表 -->
@@ -61,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="暂无内容，请稍候~"
-        android:textColor="#888"
+        android:textColor="@color/text_hint"
         android:textSize="16sp"
         android:layout_centerInParent="true"
         android:visibility="gone" />

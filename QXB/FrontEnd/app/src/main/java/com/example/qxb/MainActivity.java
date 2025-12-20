@@ -16,6 +16,7 @@ import com.example.qxb.ProfileFragment;
 import com.example.qxb.models.User;
 import com.example.qxb.models.network.ApiResponse;
 import com.example.qxb.utils.SessionManager;
+import com.example.qxb.utils.ThemeManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // 应用保存的主题 (必须在super.onCreate之前)
+        ThemeManager.getInstance(this).applySavedTheme();
+
         super.onCreate(savedInstanceState);
 
         // === 登录检查 ===

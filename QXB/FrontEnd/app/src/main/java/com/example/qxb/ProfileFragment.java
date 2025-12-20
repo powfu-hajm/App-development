@@ -20,6 +20,7 @@ import com.example.qxb.models.User;
 import com.example.qxb.models.network.ApiResponse;
 import com.example.qxb.models.network.Diary;
 import com.example.qxb.utils.SessionManager;
+import com.example.qxb.utils.ThemeManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,8 +35,10 @@ import java.util.Locale;
 public class ProfileFragment extends Fragment {
 
     private Button btnLogout;
-    private View menuConsultation, menuTests, menuDiaries, menuSettings;
+    private View menuConsultation, menuTests, menuDiaries, menuSettings, menuTheme;
     private ImageButton btnEditProfile;
+    private TextView tvCurrentTheme;
+    private ThemeManager themeManager;
 
     // 用户信息视图
     private ImageView ivProfileAvatar;
@@ -58,6 +61,7 @@ public class ProfileFragment extends Fragment {
 
         apiService = RetrofitClient.getApiService();
         sessionManager = new SessionManager(getContext());
+        themeManager = ThemeManager.getInstance(getContext());
 
         // 获取当前用户ID
         currentUserId = sessionManager.getUserId();
@@ -87,7 +91,12 @@ public class ProfileFragment extends Fragment {
         menuTests = view.findViewById(R.id.menu_tests);
         menuDiaries = view.findViewById(R.id.menu_diaries);
         menuSettings = view.findViewById(R.id.menu_settings);
+        menuTheme = view.findViewById(R.id.menu_theme);
+        tvCurrentTheme = view.findViewById(R.id.tvCurrentTheme);
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
+
+        // 更新当前主题显示
+        updateThemeDisplay();
 
         // 绑定用户信息控件
         ivProfileAvatar = view.findViewById(R.id.ivProfileAvatar);
@@ -486,6 +495,40 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(getActivity(), EditProfileActivity.class);
             startActivity(intent);
         });
+
+        // 主题切换点击事件
+        if (menuTheme != null) {
+            menuTheme.setOnClickListener(v -> showThemeDialog());
+        }
+    }
+
+    /**
+     * 更新主题显示文本
+     */
+    private void updateThemeDisplay() {
+        if (tvCurrentTheme != null && themeManager != null) {
+            tvCurrentTheme.setText(themeManager.getCurrentThemeName());
+        }
+    }
+
+    /**
+     * 显示主题选择对话框
+     */
+    private void showThemeDialog() {
+        if (getActivity() == null) return;
+
+        String[] themes = {"浅色主题", "深色主题", "跟随系统"};
+        int currentTheme = themeManager.getThemeMode();
+
+        new androidx.appcompat.app.AlertDialog.Builder(getActivity())
+                .setTitle("选择主题")
+                .setSingleChoiceItems(themes, currentTheme, (dialog, which) -> {
+                    themeManager.setThemeMode(which);
+                    updateThemeDisplay();
+                    dialog.dismiss();
+                })
+                .setNegativeButton("取消", null)
+                .show();
     }
 
     private void logout() {

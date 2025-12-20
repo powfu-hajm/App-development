@@ -4,27 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="?android:attr/colorBackground">
 
     <!-- 工具栏 -->
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="?attr/actionBarTheme"
-        android:elevation="4dp">
+        android:background="?attr/colorSurface"
+        android:elevation="1dp"
+        app:titleCentered="true"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@color/icon_primary">
 
         <TextView
             android:id="@+id/tvToolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="我的测试"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
-    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <!-- 加载中提示 -->
     <ProgressBar
@@ -44,11 +47,11 @@
         android:gravity="center"
         android:visibility="gone">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="📋"
-            android:textSize="60sp"
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_test_mbti"
+            app:tint="@color/text_hint"
             android:layout_marginBottom="16dp" />
 
         <TextView
@@ -56,7 +59,7 @@
             android:layout_height="wrap_content"
             android:text="暂无测试记录"
             android:textSize="18sp"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/text_secondary"
             android:layout_marginBottom="8dp" />
 
         <TextView
@@ -64,7 +67,7 @@
             android:layout_height="wrap_content"
             android:text="完成心理测试后，记录会显示在这里"
             android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@color/text_hint" />
 
     </LinearLayout>
 

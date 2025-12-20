@@ -3,22 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/system_accent1_100"
+    android:background="?android:attr/colorBackground"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="20dp">
+        android:padding="16dp">
 
         <!-- 欢迎卡片 -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border"
+            app:cardBackgroundColor="?attr/colorSurface">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,7 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="晚上好，用户"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_primary"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -40,18 +43,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="今天是2025年09月30日 星期一"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_secondary"
                     android:textSize="14sp"
-                    android:alpha="0.8"
                     android:layout_marginTop="4dp" />
 
-                <!-- 新增：当前时间显示（实时更新） -->
                 <TextView
                     android:id="@+id/tvCurrentTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="当前时间: 00:00:00"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp" />
@@ -59,135 +60,141 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="愿你今天有个好心情 ❤️"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
+                    android:text="愿你今天有个好心情"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="15sp"
                     android:layout_marginTop="8dp" />
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- 功能卡片区域 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:layout_marginBottom="16dp">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_chat"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                android:layout_margin="8dp"
+                android:layout_marginEnd="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:rippleColor="?attr/colorPrimary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="16dp">
+                    android:padding="12dp">
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_chat_bubble"
-                        android:contentDescription="AI倾诉图标" />
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_nav_chat"
+                        app:tint="@color/icon_primary" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="AI倾诉"
                         android:textSize="14sp"
-                        android:textColor="@android:color/black"
-                        android:gravity="center"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="8dp" />
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_diary"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                android:layout_margin="8dp"
+                android:layout_marginHorizontal="4dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:rippleColor="?attr/colorPrimary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="16dp">
+                    android:padding="12dp">
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_fragment_diary"
-                        android:contentDescription="心情日记图标" />
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_nav_diary"
+                        app:tint="@color/icon_primary" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="心情日记"
                         android:textSize="14sp"
-                        android:textColor="@android:color/black"
-                        android:gravity="center"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="8dp" />
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_test"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:rippleColor="?attr/colorPrimary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="16dp">
+                    android:padding="12dp">
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_diary_book"
-                        android:contentDescription="心理测试图标" />
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_nav_test"
+                        app:tint="@color/icon_primary" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="心理测试"
                         android:textSize="14sp"
-                        android:textColor="@android:color/black"
-                        android:gravity="center"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="8dp" />
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
@@ -198,22 +205,14 @@
             android:text="每日推送"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp" />
+            android:textColor="@color/text_primary"
+            android:paddingTop="8dp"
+            android:paddingBottom="12dp" />
 
-        <!--
-            RecyclerView 用于显示所有文章和日签
-            nestedScrollingEnabled=false 让它把滚动权交给外层的 NestedScrollView
-        -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewArticles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="8dp"
             android:nestedScrollingEnabled="false"
             android:overScrollMode="never" />
 

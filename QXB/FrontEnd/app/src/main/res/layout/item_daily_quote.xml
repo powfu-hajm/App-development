@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/border"
+    app:cardBackgroundColor="?attr/colorSurface">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@android:color/white">
+        android:padding="16dp">
 
         <!-- 日签图标 -->
         <LinearLayout
@@ -22,12 +24,11 @@
             android:gravity="center_vertical"
             android:layout_marginBottom="12dp">
 
-            <TextView
+            <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:text="📅"
-                android:textSize="16sp"
-                android:gravity="center"
+                android:src="@drawable/ic_nav_diary"
+                app:tint="@color/icon_primary"
                 android:layout_marginEnd="8dp" />
 
             <TextView
@@ -35,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="心理日签"
                 android:textSize="12sp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/text_hint"
                 android:background="@drawable/bg_tag"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp" />
@@ -50,7 +51,7 @@
             android:text="日签标题"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text_primary"
             android:layout_marginBottom="8dp" />
 
         <!-- 日签内容 -->
@@ -60,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="日签内容..."
             android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/text_secondary"
             android:lineSpacingMultiplier="1.6"
             android:layout_marginBottom="12dp" />
 
@@ -71,11 +72,11 @@
             android:layout_height="wrap_content"
             android:text="每日一句"
             android:textSize="12sp"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/text_hint"
             android:background="@drawable/bg_tag"
             android:paddingHorizontal="8dp"
             android:paddingVertical="4dp" />
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="?android:attr/colorBackground">
 
     <!-- 添加 Toolbar -->
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="?attr/actionBarTheme"
-        android:elevation="4dp">
+        android:background="?attr/colorSurface"
+        android:elevation="1dp"
+        app:titleCentered="true"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@color/icon_primary">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="文章详情"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
-    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <!-- WebView (用于显示网页链接) -->
     <WebView
@@ -52,7 +56,7 @@
                 android:text="文章标题"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:lineSpacingMultiplier="1.2"
                 android:layout_marginBottom="16dp" />
 
@@ -70,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:text="5分钟阅读"
                     android:textSize="12sp"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="@color/text_hint"
                     android:background="@drawable/bg_tag"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="4dp" />
@@ -80,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:text="·"
                     android:textSize="12sp"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="@color/text_hint"
                     android:layout_marginHorizontal="8dp" />
 
                 <TextView
@@ -89,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:text="心理成长"
                     android:textSize="12sp"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="@color/text_hint"
                     android:background="@drawable/bg_tag"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="4dp" />
@@ -99,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:text="·"
                     android:textSize="12sp"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="@color/text_hint"
                     android:layout_marginHorizontal="8dp" />
 
                 <TextView
@@ -108,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:text="2024-01-15"
                     android:textSize="12sp"
-                    android:textColor="@android:color/darker_gray" />
+                    android:textColor="@color/text_hint" />
 
             </LinearLayout>
 
@@ -118,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:lineSpacingMultiplier="1.6"
                 android:textIsSelectable="true" />
 
@@ -130,7 +134,7 @@
                 android:gravity="center"
                 android:layout_marginTop="30dp"
                 android:paddingVertical="16dp"
-                android:background="@android:color/white">
+                android:background="?attr/colorSurface">
 
                 <!-- 点赞 -->
                 <LinearLayout
@@ -148,7 +152,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/btn_star_big_off"
-                        android:tint="@android:color/darker_gray" />
+                        android:tint="@color/icon_primary" />
 
                     <TextView
                         android:id="@+id/tvLikeCount"
@@ -156,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:text="点赞"
                         android:textSize="12sp"
-                        android:textColor="@android:color/darker_gray"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginTop="4dp" />
                 </LinearLayout>
 
@@ -176,14 +180,14 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/star_off"
-                        android:tint="@android:color/darker_gray" />
+                        android:tint="@color/icon_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="收藏"
                         android:textSize="12sp"
-                        android:textColor="@android:color/darker_gray"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginTop="4dp" />
                 </LinearLayout>
 
@@ -202,14 +206,14 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/ic_menu_share"
-                        android:tint="@android:color/darker_gray" />
+                        android:tint="@color/icon_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="分享"
                         android:textSize="12sp"
-                        android:textColor="@android:color/darker_gray"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginTop="4dp" />
                 </LinearLayout>
 

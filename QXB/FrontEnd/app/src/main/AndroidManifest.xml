@@ -42,7 +42,7 @@
         <activity
             android:name=".ArticleDetailActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.QXB" />
         <activity
             android:name=".VideoPlayerActivity"
             android:configChanges="orientation|screenSize"
@@ -50,31 +50,32 @@
         <activity
             android:name=".DiaryActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.QXB" />
         <activity
             android:name=".TestActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.QXB" />
         <activity
             android:name=".DiaryListActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.QXB" />
         <activity
             android:name=".MoodChartActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.QXB" />
         <activity
             android:name=".EditDiaryActivity"
             android:exported="false"
-            android:theme="@style/Theme.QXB" /> <!-- 心理测试相关活动 -->
+            android:theme="@style/Theme.QXB" />
+        <!-- 心理测试相关活动 -->
         <activity
             android:name=".TestQuestionActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.QXB" />
         <activity
             android:name=".TestResultActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.QXB" />
         <activity
             android:name=".EditProfileActivity"
             android:exported="false"
@@ -82,7 +83,7 @@
         <activity
             android:name=".ArticleListActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.QXB" />
 
 
         <provider

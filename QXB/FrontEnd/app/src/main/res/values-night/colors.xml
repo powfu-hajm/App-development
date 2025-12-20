@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== 主题颜色 (深色主题) ===== -->
+    <!-- 主色调 - 深色主题下主按钮用白色 -->
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#E0E0E0</color>
+    <color name="colorPrimaryVariant">#BDBDBD</color>
+    <color name="colorOnPrimary">#000000</color>
+
+    <!-- 次要色调 -->
+    <color name="colorSecondary">#BDBDBD</color>
+    <color name="colorSecondaryVariant">#9E9E9E</color>
+    <color name="colorOnSecondary">#000000</color>
+
+    <!-- 表面颜色 - 深色卡片背景 -->
+    <color name="colorSurface">#1A1A1A</color>
+    <color name="colorSurfaceVariant">#252525</color>
+    <color name="colorOnSurface">#FFFFFF</color>
+    <color name="colorOnSurfaceVariant">#BDBDBD</color>
+
+    <!-- 背景颜色 - 纯黑背景 -->
+    <color name="colorBackground">#000000</color>
+    <color name="colorOnBackground">#FFFFFF</color>
+
+    <!-- ===== 语义化颜色 ===== -->
+    <!-- 文本颜色 -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0B0B0</color>
+    <color name="text_hint">#707070</color>
+    <color name="text_disabled">#505050</color>
+
+    <!-- 分割线和边框 -->
+    <color name="divider">#333333</color>
+    <color name="border">#333333</color>
+
+    <!-- 背景 -->
+    <color name="background_primary">#1A1A1A</color>
+    <color name="background_secondary">#252525</color>
+    <color name="background_tertiary">#333333</color>
+
+    <!-- 图标颜色 -->
+    <color name="icon_primary">#FFFFFF</color>
+    <color name="icon_secondary">#B0B0B0</color>
+    <color name="icon_disabled">#505050</color>
+
+    <!-- ===== 底部导航颜色 ===== -->
+    <color name="nav_selected">#FFFFFF</color>
+    <color name="nav_unselected">#707070</color>
+
+    <!-- ===== 按钮颜色 ===== -->
+    <color name="button_primary_bg">#FFFFFF</color>
+    <color name="button_primary_text">#000000</color>
+
+    <!-- ===== 旧颜色兼容 (深色模式) ===== -->
+    <color name="primary_blue">#FFFFFF</color>
+    <color name="primary_light_blue">#252525</color>
+    <color name="accent_orange">#B0B0B0</color>
+    <color name="accent_light_orange">#333333</color>
+    <color name="background_white">#1A1A1A</color>
+    <color name="background_grey">#252525</color>
+    <color name="divider_grey">#333333</color>
+
+</resources>

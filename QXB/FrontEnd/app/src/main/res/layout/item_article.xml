@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:elevation="3dp"
-    android:padding="10dp">
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/border"
+    app:cardBackgroundColor="?attr/colorSurface">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <!-- 标题 -->
         <TextView
@@ -19,16 +24,16 @@
             android:text="文章标题"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="#000"/>
+            android:textColor="@color/text_primary"/>
 
-        <!-- 摘要 summary ✨✨✨ -->
+        <!-- 摘要 summary -->
         <TextView
             android:id="@+id/tvSummary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="文章摘要内容"
             android:textSize="14sp"
-            android:textColor="#666"
+            android:textColor="@color/text_secondary"
             android:layout_marginTop="6dp"/>
 
         <!-- 发布时间 -->
@@ -37,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:textColor="#888"
+            android:textColor="@color/text_hint"
             android:layout_marginTop="4dp"/>
 
         <!-- 分类 -->
@@ -46,9 +51,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:textColor="#888"
+            android:textColor="@color/text_hint"
             android:layout_marginTop="2dp"/>
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

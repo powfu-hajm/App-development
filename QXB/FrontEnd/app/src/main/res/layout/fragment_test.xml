@@ -3,21 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/system_accent1_100"
+    android:background="?android:attr/colorBackground"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <!-- 顶部横幅 -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/colorPrimary">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -29,17 +31,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="了解自己，从心理测试开始"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
+                    android:textColor="@color/colorOnPrimary"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="专业心理评估，助你更好地认识自己"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp"
+                    android:textColor="@color/colorOnPrimary"
                     android:alpha="0.9"
+                    android:textSize="14sp"
                     android:layout_marginTop="4dp" />
 
             </LinearLayout>
@@ -54,32 +56,34 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="12dp" />
 
         <!-- MBTI测试 -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="12dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            android:foreground="?attr/selectableItemBackground">
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:rippleColor="?attr/colorPrimary">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_fragment_questionaire"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@drawable/ic_test_mbti"
+                    android:padding="12dp"
+                    android:background="@drawable/circle_background"
+                    app:tint="@color/icon_primary"
                     android:layout_marginEnd="16dp" />
 
                 <LinearLayout
@@ -99,28 +103,28 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="探索你的性格类型，了解职业倾向和人际关系模式"
-                        android:textSize="14sp"
+                        android:text="探索你的性格类型"
+                        android:textSize="13sp"
                         android:textColor="@color/text_secondary"
-                        android:layout_marginTop="4dp" />
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="28题 · 约8分钟"
                         android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginTop="8dp" />
+                        android:textColor="@color/text_hint"
+                        android:layout_marginTop="4dp" />
 
                 </LinearLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnMbtiTest"
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:text="开始测试"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp" />
+                    android:layout_height="36dp"
+                    android:text="开始"
+                    android:textSize="13sp"
+                    style="@style/Widget.QXB.Button" />
 
             </LinearLayout>
 
@@ -130,23 +134,28 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="12dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            android:foreground="?attr/selectableItemBackground">
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:rippleColor="?attr/colorPrimary">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_fragment_questionaire"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@drawable/ic_test_depression"
+                    android:padding="12dp"
+                    android:background="@drawable/circle_background"
+                    app:tint="@color/icon_primary"
                     android:layout_marginEnd="16dp" />
 
                 <LinearLayout
@@ -166,28 +175,28 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="评估近两周的情绪状态，了解抑郁风险程度"
-                        android:textSize="14sp"
+                        android:text="评估近两周的情绪状态"
+                        android:textSize="13sp"
                         android:textColor="@color/text_secondary"
-                        android:layout_marginTop="4dp" />
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="20题 · 约5分钟"
                         android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginTop="8dp" />
+                        android:textColor="@color/text_hint"
+                        android:layout_marginTop="4dp" />
 
                 </LinearLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnDepressionTest"
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:text="开始测试"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp" />
+                    android:layout_height="36dp"
+                    android:text="开始"
+                    android:textSize="13sp"
+                    style="@style/Widget.QXB.Button" />
 
             </LinearLayout>
 
@@ -197,23 +206,28 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="12dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            android:foreground="?attr/selectableItemBackground">
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:rippleColor="?attr/colorPrimary">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_fragment_questionaire"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@drawable/ic_test_anxiety"
+                    android:padding="12dp"
+                    android:background="@drawable/circle_background"
+                    app:tint="@color/icon_primary"
                     android:layout_marginEnd="16dp" />
 
                 <LinearLayout
@@ -233,28 +247,28 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="检测焦虑症状，了解焦虑程度和影响因素"
-                        android:textSize="14sp"
+                        android:text="检测焦虑症状程度"
+                        android:textSize="13sp"
                         android:textColor="@color/text_secondary"
-                        android:layout_marginTop="4dp" />
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="20题 · 约5分钟"
                         android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginTop="8dp" />
+                        android:textColor="@color/text_hint"
+                        android:layout_marginTop="4dp" />
 
                 </LinearLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAnxietyTest"
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:text="开始测试"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp" />
+                    android:layout_height="36dp"
+                    android:text="开始"
+                    android:textSize="13sp"
+                    style="@style/Widget.QXB.Button" />
 
             </LinearLayout>
 
@@ -264,23 +278,28 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="24dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            android:foreground="?attr/selectableItemBackground">
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:rippleColor="?attr/colorPrimary">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_fragment_questionaire"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@drawable/ic_test_stress"
+                    android:padding="12dp"
+                    android:background="@drawable/circle_background"
+                    app:tint="@color/icon_primary"
                     android:layout_marginEnd="16dp" />
 
                 <LinearLayout
@@ -300,28 +319,28 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="评估当前压力水平，提供减压建议和方法"
-                        android:textSize="14sp"
+                        android:text="评估当前压力水平"
+                        android:textSize="13sp"
                         android:textColor="@color/text_secondary"
-                        android:layout_marginTop="4dp" />
+                        android:layout_marginTop="2dp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="14题 · 约4分钟"
                         android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginTop="8dp" />
+                        android:textColor="@color/text_hint"
+                        android:layout_marginTop="4dp" />
 
                 </LinearLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnStressTest"
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="开始测试" />
+                    android:layout_height="36dp"
+                    android:text="开始"
+                    android:textSize="13sp"
+                    style="@style/Widget.QXB.Button" />
 
             </LinearLayout>
 
