@@ -65,6 +65,11 @@
     <color name="mood_anxious">#FF6B6B</color>
     <color name="mood_sad">#9C27B0</color>
 
+    <!-- ===== 头像颜色 ===== -->
+    <color name="avatar_ring">#E0E0E0</color>
+    <color name="avatar_inner_bg">#F5F5F5</color>
+    <color name="avatar_user">#BDBDBD</color>
+
     <!-- ===== 底部导航颜色 ===== -->
     <color name="nav_selected">#1A1A1A</color>
     <color name="nav_unselected">#999999</color>

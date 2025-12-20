@@ -123,8 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="开始"
-                    android:textSize="13sp"
-                    style="@style/Widget.QXB.Button" />
+                    style="@style/Widget.QXB.Button.Small" />
 
             </LinearLayout>
 
@@ -195,8 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="开始"
-                    android:textSize="13sp"
-                    style="@style/Widget.QXB.Button" />
+                    style="@style/Widget.QXB.Button.Small" />
 
             </LinearLayout>
 
@@ -267,8 +265,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="开始"
-                    android:textSize="13sp"
-                    style="@style/Widget.QXB.Button" />
+                    style="@style/Widget.QXB.Button.Small" />
 
             </LinearLayout>
 
@@ -339,8 +336,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="开始"
-                    android:textSize="13sp"
-                    style="@style/Widget.QXB.Button" />
+                    style="@style/Widget.QXB.Button.Small" />
 
             </LinearLayout>
 

@@ -43,6 +43,11 @@
     <color name="icon_secondary">#B0B0B0</color>
     <color name="icon_disabled">#505050</color>
 
+    <!-- ===== 头像颜色 ===== -->
+    <color name="avatar_ring">#3A3A3A</color>
+    <color name="avatar_inner_bg">#2A2A2A</color>
+    <color name="avatar_user">#606060</color>
+
     <!-- ===== 底部导航颜色 ===== -->
     <color name="nav_selected">#FFFFFF</color>
     <color name="nav_unselected">#707070</color>
