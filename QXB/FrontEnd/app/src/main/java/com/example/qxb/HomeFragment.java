@@ -10,16 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.qxb.model.PageResponse;
+import com.example.qxb.models.PageResponse;
 import com.example.qxb.models.User;
-import com.example.qxb.models.network.ApiResponse;
 import com.example.qxb.models.Article;
+import com.example.qxb.models.network.ApiResponse;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,11 +38,14 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     private int page = 1;
-    private int size = 10;
+    private int size = 6;
     private CardView cardChat, cardDiary, cardTest;
     private RecyclerView recyclerViewArticles;
+    private TextView tvEmpty;
+
+    // 关键修改：这里使用final确保列表引用不变
+    private final List<Article> contentList = new ArrayList<>();
     private MultiTypeAdapter multiTypeAdapter;
-    private List<ContentItem> contentList = new ArrayList<>();
     private ApiService apiService;
 
     // 时间显示相关
@@ -50,11 +54,22 @@ public class HomeFragment extends Fragment {
     private ScheduledExecutorService timeScheduler;
     private boolean isTimeUpdating = false;
 
+    // 修改类型ID数组，先尝试typeId=1（专栏），这是后端实际有的类型
+    private Integer[] typeIds = {1, 4, 5, 3, 2}; // 专栏, 自我成长, 情感关系, 科普, 测试
+    private int currentTypeIndex = 0;
+
+    // 添加加载状态标志
+    private boolean isLoading = false;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // 初始化Retrofit
+        if (RetrofitClient.getApiService() == null && getActivity() != null) {
+            RetrofitClient.init(getActivity().getApplicationContext());
+        }
         apiService = RetrofitClient.getApiService();
 
         initViews(view);
@@ -76,6 +91,7 @@ public class HomeFragment extends Fragment {
         cardDiary = view.findViewById(R.id.card_diary);
         cardTest = view.findViewById(R.id.card_test);
         recyclerViewArticles = view.findViewById(R.id.recyclerViewArticles);
+        tvEmpty = view.findViewById(R.id.tvEmpty);
 
         // 安全初始化时间显示视图
         try {
@@ -90,8 +106,6 @@ public class HomeFragment extends Fragment {
             tvGreeting = null;
         }
 
-        // 新增：当前时间显示控件（如果布局中没有，可以添加到布局中）
-        // 注意：如果fragment_home.xml中没有tvCurrentTime，需要添加
         try {
             tvCurrentTime = view.findViewById(R.id.tvCurrentTime);
         } catch (Exception e) {
@@ -112,13 +126,11 @@ public class HomeFragment extends Fragment {
         timeScheduler = Executors.newSingleThreadScheduledExecutor();
         isTimeUpdating = true;
 
-        // 立即执行一次，然后每秒执行一次
         timeScheduler.scheduleAtFixedRate(() -> {
             if (!isTimeUpdating) return;
 
             updateCurrentTime();
 
-            // 每分钟更新一次问候语（减少不必要的更新）
             Calendar calendar = Calendar.getInstance();
             if (calendar.get(Calendar.SECOND) == 0) {
                 updateGreetingWithUserInfo();
@@ -137,50 +149,41 @@ public class HomeFragment extends Fragment {
     private void updateCurrentTime() {
         if (getActivity() == null) return;
 
-        // 在主线程更新UI
         mainHandler.post(() -> {
             try {
                 Calendar calendar = Calendar.getInstance();
 
-                // 获取当前时间
                 int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH) + 1; // 月份从0开始
+                int month = calendar.get(Calendar.MONTH) + 1;
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 int hour = calendar.get(Calendar.HOUR_OF_DAY);
                 int minute = calendar.get(Calendar.MINUTE);
                 int second = calendar.get(Calendar.SECOND);
                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-                // 格式化星期
                 String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
                 String weekDay = weekDays[dayOfWeek - 1];
 
-                // 格式化日期和时间
                 String dateStr = String.format(Locale.CHINA, "%04d年%02d月%02d日 %s", year, month, day, weekDay);
                 String timeStr = String.format(Locale.CHINA, "%02d:%02d:%02d", hour, minute, second);
 
-                // 更新日期显示
                 if (tvDate != null) {
                     tvDate.setText("今天是" + dateStr);
                 }
 
-                // 更新当前时间显示（精确到秒）
                 if (tvCurrentTime != null) {
                     tvCurrentTime.setText("当前时间: " + timeStr);
                 } else {
-                    // 如果没有专门的当前时间控件，可以合并显示
                     if (tvDate != null) {
                         tvDate.setText("今天是" + dateStr + "  " + timeStr);
                     }
                 }
 
-                // 调试日志
-                if (second == 0) { // 每分钟记录一次日志，避免过多日志
+                if (second == 0) {
                     Log.d("HomeFragment", "时间更新: " + dateStr + " " + timeStr);
                 }
             } catch (Exception e) {
                 Log.e("HomeFragment", "更新日期时间失败: " + e.getMessage());
-                // 使用简单的格式化作为后备
                 try {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 EEEE HH:mm:ss", Locale.CHINA);
                     String currentDateTime = sdf.format(new Date());
@@ -195,7 +198,6 @@ public class HomeFragment extends Fragment {
     }
 
     private String getTimeGreeting(int hour) {
-        // 根据24小时制进行时间判断
         if (hour >= 0 && hour < 5) {
             return "夜深了";
         } else if (hour >= 5 && hour < 9) {
@@ -218,14 +220,11 @@ public class HomeFragment extends Fragment {
 
         mainHandler.post(() -> {
             try {
-                // 使用Calendar获取当前小时（24小时制）
                 Calendar calendar = Calendar.getInstance();
                 int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
                 String timeGreeting = getTimeGreeting(hour);
-                Log.d("HomeFragment", "时间问候语: " + timeGreeting + " (当前小时: " + hour + ")");
 
-                // 从MainActivity获取当前用户信息
                 MainActivity mainActivity = (MainActivity) getActivity();
                 String username = "用户";
                 String nickname = null;
@@ -234,11 +233,9 @@ public class HomeFragment extends Fragment {
                 if (mainActivity != null) {
                     User currentUser = mainActivity.getCurrentUser();
                     if (currentUser != null) {
-                        // 优先使用昵称，如果没有昵称则使用用户名
                         nickname = currentUser.getNickname();
                         username = currentUser.getUsername() != null ? currentUser.getUsername() : "用户";
                         hasUser = true;
-                        Log.d("HomeFragment", "获取到用户信息 - 昵称: " + nickname + ", 用户名: " + username);
                     }
                 }
 
@@ -253,7 +250,6 @@ public class HomeFragment extends Fragment {
                     greeting = timeGreeting + "，用户";
                 }
 
-                Log.d("HomeFragment", "最终问候语: " + greeting);
                 tvGreeting.setText(greeting);
             } catch (Exception e) {
                 Log.e("HomeFragment", "更新问候语失败: " + e.getMessage());
@@ -263,14 +259,71 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupContentList() {
-        if (recyclerViewArticles != null) {
-            contentList.clear();
-            recyclerViewArticles.setLayoutManager(new LinearLayoutManager(getContext()));
-            multiTypeAdapter = new MultiTypeAdapter(contentList, this::handleContentClick);
-            recyclerViewArticles.setAdapter(multiTypeAdapter);
+        if (recyclerViewArticles != null && getActivity() != null) {
+            // 显示加载中
+            if (tvEmpty != null) {
+                tvEmpty.setText("正在加载文章...");
+                tvEmpty.setVisibility(View.VISIBLE);
+            }
 
-            // 从网络加载数据
+            // 设置布局管理器
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            recyclerViewArticles.setLayoutManager(layoutManager);
+
+            // 创建适配器 - 使用同一个contentList对象
+            multiTypeAdapter = new MultiTypeAdapter(contentList, new MultiTypeAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(Article item) {
+                    handleArticleClick(item);
+                }
+            });
+
+            recyclerViewArticles.setAdapter(multiTypeAdapter);
+            Log.d("HomeFragment", "setupContentList完成，开始加载文章");
+
+            // 加载网络文章
             loadArticlesFromNetwork();
+        } else {
+            Log.e("HomeFragment", "recyclerViewArticles为null或Activity为null");
+        }
+    }
+
+    private void handleArticleClick(Article article) {
+        if (article == null || getActivity() == null) return;
+
+        // 检查是否是特殊功能项
+        if ("daily_quote".equals(article.getOriginalUrl())) {
+            // 心理日签点击处理
+            Intent intent = new Intent(getActivity(), ArticleDetailActivity.class);
+            intent.putExtra("article_title", article.getTitle());
+            intent.putExtra("article_content", article.getSummary());
+            intent.putExtra("read_time", "1分钟阅读");
+            intent.putExtra("category", article.getSource());
+            intent.putExtra("content_id", article.getId() != null ? article.getId() : 0L);
+            startActivity(intent);
+        } else if ("action_more".equals(article.getSource())) {
+            // 查看更多文章
+            Intent intent = new Intent(getActivity(), ArticleListActivity.class);
+            startActivity(intent);
+        } else if (article.getId() != null && article.getId().intValue() > 0) {
+            // 普通文章
+            Intent intent = new Intent(getActivity(), ArticleDetailActivity.class);
+            intent.putExtra("article_title", article.getTitle());
+            intent.putExtra("article_content", article.getSummary());
+            intent.putExtra("read_time", (article.getReadCount() != null ? article.getReadCount() : 0) + "阅读");
+            intent.putExtra("category", article.getSource() != null ? article.getSource() : "心理成长");
+            intent.putExtra("content_id", article.getId());
+
+            // 添加文章URL用于WebView显示
+            if (article.getOriginalUrl() != null && article.getOriginalUrl().startsWith("http")) {
+                intent.putExtra("article_url", article.getOriginalUrl());
+            }
+
+            startActivity(intent);
+        } else {
+            // 其他情况
+            Toast.makeText(getActivity(), "正在加载，请稍候", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -278,93 +331,176 @@ public class HomeFragment extends Fragment {
      * 从后端API加载文章列表
      */
     private void loadArticlesFromNetwork() {
-        if (apiService == null) return;
+        if (isLoading) {
+            Log.d("HomeFragment", "正在加载中，跳过");
+            return;
+        }
 
-        Log.d("HomeFragment", "开始加载文章列表...");
-        // 使用 getArticleList 方法，只需要 pageNum 和 pageSize 两个参数
-        apiService.getArticleList(page, size)
-                .enqueue(new Callback<PageResponse<Article>>() {
-                    @Override
-                    public void onResponse(Call<PageResponse<Article>> call,
-                                           Response<PageResponse<Article>> response) {
+        if (apiService == null) {
+            Log.e("HomeFragment", "ApiService为空，无法加载文章");
+            showOfflineData();
+            return;
+        }
 
-                        if (response.isSuccessful() && response.body() != null) {
-                            PageResponse<Article> pageResponse = response.body();
+        isLoading = true;
 
-                            // 使用 getData() 方法而不是 getRecords()
-                            List<Article> articles = pageResponse.getData();
+        // 获取当前类型ID
+        Integer typeId = typeIds[currentTypeIndex];
+        Log.d("HomeFragment", "加载文章，类型ID: " + typeId + ", 页码: " + page + ", 大小: " + size);
 
-                            if (articles != null && !articles.isEmpty()) {
-                                Log.d("HomeFragment", "文章列表大小: " + articles.size());
-                                updateContentList(articles);
-                            } else {
-                                Log.d("HomeFragment", "文章列表为空，加载离线数据");
-                                loadOfflineData();
-                            }
+        Call<ApiResponse<PageResponse<Article>>> call = apiService.getArticlePage(page, size, typeId);
+        call.enqueue(new Callback<ApiResponse<PageResponse<Article>>>() {
+            @Override
+            public void onResponse(
+                    Call<ApiResponse<PageResponse<Article>>> call,
+                    Response<ApiResponse<PageResponse<Article>>> response) {
+
+                isLoading = false;
+                Log.d("HomeFragment", "网络响应: " + response.code());
+
+                if (response.isSuccessful() && response.body() != null) {
+                    ApiResponse<PageResponse<Article>> resp = response.body();
+                    Log.d("HomeFragment", "API响应: success=" + resp.isSuccess() + ", message=" + resp.getMessage());
+
+                    if (resp.isSuccess() && resp.getData() != null) {
+                        PageResponse<Article> pageData = resp.getData();
+                        List<Article> articles = pageData.getRecords();
+
+                        Log.d("HomeFragment", "获取到文章数据: total=" + pageData.getTotal() + ", records=" + (articles != null ? articles.size() : 0));
+
+                        if (articles != null && !articles.isEmpty()) {
+                            Log.d("HomeFragment", "成功加载 " + articles.size() + " 篇文章");
+
+                            // 更新显示列表
+                            updateContentListWithArticles(articles);
                         } else {
-                            Log.d("HomeFragment", "响应不成功或为空，加载离线数据");
-                            loadOfflineData();
+                            Log.w("HomeFragment", "文章列表为空，尝试下一个类型");
+                            // 尝试下一个类型
+                            loadNextTypeArticles();
                         }
+                    } else {
+                        Log.e("HomeFragment", "API响应失败: " + resp.getMessage());
+                        showOfflineData();
                     }
+                } else {
+                    Log.e("HomeFragment", "HTTP请求失败: " + response.code() + ", message: " + response.message());
+                    showOfflineData();
+                }
+            }
 
-                    @Override
-                    public void onFailure(Call<PageResponse<Article>> call, Throwable t) {
-                        Log.e("HomeFragment", "请求失败: " + t.getMessage());
-                        loadOfflineData();
-                    }
-                });
+            @Override
+            public void onFailure(Call<ApiResponse<PageResponse<Article>>> call, Throwable t) {
+                isLoading = false;
+                Log.e("HomeFragment", "网络请求失败: " + t.getMessage());
+                showOfflineData();
+            }
+        });
     }
 
-    private void updateContentList(List<Article> articles) {
+    /**
+     * 尝试加载下一个类型的文章
+     */
+    private void loadNextTypeArticles() {
+        currentTypeIndex++;
+        if (currentTypeIndex < typeIds.length) {
+            Log.d("HomeFragment", "尝试下一个文章类型，索引: " + currentTypeIndex + ", typeId=" + typeIds[currentTypeIndex]);
+            loadArticlesFromNetwork();
+        } else {
+            Log.w("HomeFragment", "所有类型文章都为空，显示离线数据");
+            showOfflineData();
+        }
+    }
+
+    /**
+     * 使用实际文章更新内容显示列表
+     */
+    private void updateContentListWithArticles(List<Article> articles) {
         if (getActivity() == null) return;
 
-        mainHandler.post(() -> {
+        getActivity().runOnUiThread(() -> {
+            // 清除旧数据
             contentList.clear();
+            Log.d("HomeFragment", "清空contentList，当前大小: " + contentList.size());
 
-            // 1. 心理日签
-            ContentItem dailyQuote = new ContentItem(
-                    "daily_quote",
-                    "心理日签",
-                    "什么是真正的爱？这是我见过最好的答案\n爱是接纳不完美，是给予自由，是在彼此陪伴中共同成长。",
-                    "daily_quote"
-            );
-            dailyQuote.setCategory("每日一句");
+            // 隐藏空状态提示
+            if (tvEmpty != null) {
+                tvEmpty.setVisibility(View.GONE);
+            }
+
+            // 1. 添加心理日签
+            Article dailyQuote = new Article();
+            dailyQuote.setId(9999L); // 特殊ID用于标识心理日签
+            dailyQuote.setTitle("心理日签");
+            dailyQuote.setSummary("什么是真正的爱？这是我见过最好的答案\n爱是接纳不完美，是给予自由，是在彼此陪伴中共同成长。");
+            dailyQuote.setReadCount(0);
+            dailyQuote.setSource("每日一句");
+            dailyQuote.setOriginalUrl("daily_quote");
             contentList.add(dailyQuote);
+            Log.d("HomeFragment", "添加心理日签，当前大小: " + contentList.size());
 
-            // ⭐⭐ 2. 只保留前N条推文 ⭐⭐
-            int MAX_SHOW = 5;  // 首页最多展示 5 篇
-            List<Article> shortList = new ArrayList<>();
+            // 2. 添加实际文章（限制最多5条）
+            int MAX_SHOW = Math.min(5, articles.size());
+            Log.d("HomeFragment", "显示 " + MAX_SHOW + " 篇文章");
 
-            if (articles != null && !articles.isEmpty()) {
-                shortList = articles.size() > MAX_SHOW ? articles.subList(0, MAX_SHOW) : articles;
+            for (int i = 0; i < MAX_SHOW; i++) {
+                Article article = articles.get(i);
+                // 确保文章有标题
+                if (article.getTitle() != null && !article.getTitle().isEmpty()) {
+                    // 确保source字段不为空
+                    if (article.getSource() == null || article.getSource().isEmpty()) {
+                        article.setSource(article.getType() != null ? article.getType() : "心理文章");
+                    }
+
+                    contentList.add(article);
+                    Log.d("HomeFragment", "添加文章到显示列表: " + article.getTitle() + ", source=" + article.getSource() + ", 当前大小: " + contentList.size());
+                }
             }
 
-            // 3. 添加推文到首页列表
-            for (Article article : shortList) {
-                ContentItem item = new ContentItem(
-                        String.valueOf(article.getId()),
-                        article.getTitle(),
-                        article.getSummary(),
-                        "article"
-                );
-                item.setReadTime(article.getReadCount() + "阅读");
-                item.setCategory(article.getSource());
-                item.setMediaUrl(article.getOriginalUrl());
-
-                contentList.add(item);
-            }
-
-            // ⭐⭐4. 在底部添加 "查看更多" 按钮 ⭐⭐
-            ContentItem moreItem = new ContentItem(
-                    "more_articles",
-                    "查看更多文章",
-                    "前往文章列表",
-                    "action_more"
-            );
+            // 3. 添加查看更多按钮
+            Article moreItem = new Article();
+            moreItem.setId(9998L); // 特殊ID用于标识查看更多
+            moreItem.setTitle("查看更多文章");
+            moreItem.setSummary("探索更多心理文章和资源");
+            moreItem.setSource("action_more");
             contentList.add(moreItem);
+            Log.d("HomeFragment", "添加查看更多按钮，当前大小: " + contentList.size());
 
+            // 重要：直接通知适配器数据已变化，不要调用updateData方法
             if (multiTypeAdapter != null) {
+                // 不再调用updateData，直接通知适配器刷新
                 multiTypeAdapter.notifyDataSetChanged();
+                Log.d("HomeFragment", "适配器通知刷新，共 " + contentList.size() + " 项");
+
+                // 检查RecyclerView是否可见
+                if (recyclerViewArticles.getVisibility() != View.VISIBLE) {
+                    recyclerViewArticles.setVisibility(View.VISIBLE);
+                    Log.d("HomeFragment", "设置RecyclerView可见");
+                }
+
+                // 显示成功提示
+                if (MAX_SHOW > 0) {
+                    Toast.makeText(getActivity(), "已加载" + MAX_SHOW + "篇文章", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Log.e("HomeFragment", "multiTypeAdapter为null，无法更新UI");
+                showEmptyState();
+            }
+
+            // 增加页码以便下次加载
+            page++;
+        });
+    }
+
+    private void showEmptyState() {
+        if (getActivity() == null) return;
+
+        getActivity().runOnUiThread(() -> {
+            if (tvEmpty != null) {
+                tvEmpty.setText("暂无文章，下拉刷新");
+                tvEmpty.setVisibility(View.VISIBLE);
+            }
+            if (recyclerViewArticles != null) {
+                recyclerViewArticles.setVisibility(View.GONE);
             }
         });
     }
@@ -372,64 +508,81 @@ public class HomeFragment extends Fragment {
     private void loadOfflineData() {
         if (getActivity() == null) return;
 
-        mainHandler.post(() -> {
+        getActivity().runOnUiThread(() -> {
             contentList.clear();
+            Log.d("HomeFragment", "加载离线数据，清空contentList");
+
+            // 隐藏空状态提示
+            if (tvEmpty != null) {
+                tvEmpty.setVisibility(View.GONE);
+            }
 
             // 1. 心理日签
-            ContentItem dailyQuote = new ContentItem(
-                    "daily_quote",
-                    "心理日签",
-                    "什么是真正的爱？这是我见过最好的答案\n爱是接纳不完美，是给予自由，是在彼此陪伴中共同成长。",
-                    "daily_quote"
-            );
-            dailyQuote.setCategory("每日一句");
+            Article dailyQuote = new Article();
+            dailyQuote.setId(9999L);
+            dailyQuote.setTitle("心理日签");
+            dailyQuote.setSummary("什么是真正的爱？这是我见过最好的答案\n爱是接纳不完美，是给予自由，是在彼此陪伴中共同成长。");
+            dailyQuote.setReadCount(0);
+            dailyQuote.setSource("每日一句");
+            dailyQuote.setOriginalUrl("daily_quote");
             contentList.add(dailyQuote);
 
             // 2. 离线模式下的文章
-            ContentItem article1 = new ContentItem(
-                    "1",
-                    "工作多年突然觉得'没意思'？(离线模式)",
-                    "探索职业倦怠背后的心理因素...",
-                    "article"
-            );
-            article1.setReadTime("5分钟阅读");
-            article1.setCategory("心理成长");
+            Article article1 = new Article();
+            article1.setId(1L);
+            article1.setTitle("工作多年突然觉得'没意思'？(离线模式)");
+            article1.setSummary("探索职业倦怠背后的心理因素...");
+            article1.setReadCount(5);
+            article1.setSource("心理成长");
+            article1.setType("专栏");
             contentList.add(article1);
 
-            ContentItem article2 = new ContentItem(
-                    "2",
-                    "如何应对焦虑情绪？(离线模式)",
-                    "焦虑是常见的情绪反应，但过度焦虑会影响生活...",
-                    "article"
-            );
-            article2.setReadTime("3分钟阅读");
-            article2.setCategory("情绪管理");
+            Article article2 = new Article();
+            article2.setId(2L);
+            article2.setTitle("如何应对焦虑情绪？(离线模式)");
+            article2.setSummary("焦虑是常见的情绪反应，但过度焦虑会影响生活...");
+            article2.setReadCount(3);
+            article2.setSource("情绪管理");
+            article2.setType("科普");
             contentList.add(article2);
 
-            ContentItem article3 = new ContentItem(
-                    "3",
-                    "建立健康的人际边界(离线模式)",
-                    "学会说'不'，是自我关爱的重要一步...",
-                    "article"
-            );
-            article3.setReadTime("4分钟阅读");
-            article3.setCategory("人际关系");
+            Article article3 = new Article();
+            article3.setId(3L);
+            article3.setTitle("建立健康的人际边界(离线模式)");
+            article3.setSummary("学会说'不'，是自我关爱的重要一步...");
+            article3.setReadCount(4);
+            article3.setSource("人际关系");
+            article3.setType("自我成长");
             contentList.add(article3);
 
             // 3. 查看更多按钮
-            ContentItem moreItem = new ContentItem(
-                    "more_articles",
-                    "查看更多文章",
-                    "前往文章列表",
-                    "action_more"
-            );
+            Article moreItem = new Article();
+            moreItem.setId(9998L);
+            moreItem.setTitle("查看更多文章");
+            moreItem.setSummary("前往文章列表");
+            moreItem.setSource("action_more");
             contentList.add(moreItem);
 
             if (multiTypeAdapter != null) {
                 multiTypeAdapter.notifyDataSetChanged();
+                if (recyclerViewArticles != null) {
+                    recyclerViewArticles.setVisibility(View.VISIBLE);
+                }
+                Log.d("HomeFragment", "离线数据加载完成，共 " + contentList.size() + " 项");
+            } else {
+                showEmptyState();
             }
-            Toast.makeText(getContext(), "网络不佳，已加载离线内容", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "网络不佳，已加载离线内容", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private void showOfflineData() {
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(() -> {
+                Toast.makeText(getActivity(), "网络异常，加载本地缓存", Toast.LENGTH_SHORT).show();
+                loadOfflineData();
+            });
+        }
     }
 
     private void setupClickListeners() {
@@ -456,73 +609,38 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void handleContentClick(ContentItem item) {
-        if (item == null) return;
-
-        Intent intent = null;
-
-        switch (item.getType()) {
-            case "daily_quote":
-                intent = new Intent(getActivity(), ArticleDetailActivity.class);
-                intent.putExtra("article_title", item.getTitle());
-                intent.putExtra("article_content", item.getDescription());
-                intent.putExtra("read_time", "1分钟阅读");
-                intent.putExtra("category", "每日一句");
-                break;
-
-            case "action_more":
-                Intent i = new Intent(getActivity(), ArticleListActivity.class);
-                startActivity(i);
-                break;
-
-            case "article":
-            default:
-                intent = new Intent(getActivity(), ArticleDetailActivity.class);
-                intent.putExtra("article_title", item.getTitle());
-                if (item.getMediaUrl() != null && item.getMediaUrl().startsWith("http")) {
-                    intent.putExtra("article_url", item.getMediaUrl());
-                }
-                intent.putExtra("article_content", item.getDescription());
-                intent.putExtra("read_time", item.getReadTime());
-                intent.putExtra("category", item.getCategory());
-                break;
-        }
-
-        if (intent != null) {
-            intent.putExtra("content_id", item.getId());
-            intent.putExtra("content_type", item.getType());
-            startActivity(intent);
-        }
-    }
-
     @Override
     public void onResume() {
         super.onResume();
-        // 确保时间更新在恢复时继续
         if (!isTimeUpdating) {
             startRealTimeUpdates();
         }
 
-        // 刷新用户信息
         if (getActivity() instanceof MainActivity) {
             MainActivity mainActivity = (MainActivity) getActivity();
             if (mainActivity.getCurrentUser() == null) {
                 mainActivity.loadUserInfo();
             }
         }
+
+        // 刷新文章列表 - 只有当没有文章数据时才刷新
+        if (contentList.isEmpty() || contentList.size() <= 2) { // 只有日签和查看更多按钮，或者空
+            Log.d("HomeFragment", "onResume: 重新加载文章");
+            page = 1;
+            currentTypeIndex = 0;
+            loadArticlesFromNetwork();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        // 暂停时停止时间更新以节省资源
         stopRealTimeUpdates();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        // 确保清理资源
         stopRealTimeUpdates();
         if (mainHandler != null) {
             mainHandler.removeCallbacksAndMessages(null);

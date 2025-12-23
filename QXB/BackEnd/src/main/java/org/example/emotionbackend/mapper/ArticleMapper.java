@@ -1,24 +1,20 @@
 package org.example.emotionbackend.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.example.emotionbackend.entity.Article;
+import org.apache.ibatis.annotations.*;
 
-import java.util.List;
+import org.example.emotionbackend.entity.Article;
 
 @Mapper
 public interface ArticleMapper extends BaseMapper<Article> {
 
     /**
-     * 自定义分页查询
+     * Redis 阅读量同步：数据库阅读数字段自增
      */
-    List<Article> page(@Param("offset") int offset,
-                       @Param("size") int size,
-                       @Param("type") int type);
+    @Update("UPDATE article SET read_count = read_count + #{inc} WHERE id = #{id}")
+    void increaseReadCount(@Param("id") Long id, @Param("inc") Integer inc);
 
-    /**
-     * 统计类型总数
-     */
-    int count(@Param("type") int type);
+    @Update("UPDATE article SET read_count = read_count + #{readCount} WHERE id = #{id}")
+    int incrementViews(@Param("id") Long id,
+                       @Param("readCount") Integer readCount);
 }

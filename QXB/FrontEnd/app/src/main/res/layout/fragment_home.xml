@@ -207,14 +207,27 @@
             android:textStyle="bold"
             android:textColor="@color/text_primary"
             android:paddingTop="8dp"
-            android:paddingBottom="12dp" />
+            android:paddingBottom="12px" />
 
+        <!-- 重要修改：移除 SwipeRefreshLayout，直接使用 RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewArticles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             android:overScrollMode="never" />
+
+        <!-- 空状态提示 -->
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="正在加载文章..."
+            android:textColor="@color/text_hint"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:visibility="gone" />
 
     </LinearLayout>
 

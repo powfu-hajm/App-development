@@ -1,90 +1,80 @@
 package com.example.qxb.models;
 
-public class Article {
+import com.google.gson.annotations.SerializedName;
 
-    private Long id;           // 文章ID
-    private String title;      // 标题
-    private String content;    // 内容
-    private String author;     // 作者
-    private String coverUrl;   // 封面图
-    private String publishTime;// 发布时间
+import java.time.LocalDateTime;
+import java.util.Date;
+
+public class Article {
+    @SerializedName("id")
+    private Long id;
+
+    @SerializedName("title")
+    private String title;
+
+    @SerializedName("summary")
     private String summary;
-    private int readCount;
-    private String source;
+
+    @SerializedName("coverUrl")
+    private String coverUrl;
+
+    @SerializedName("originalUrl")
     private String originalUrl;
 
-    public Article() {
-    }
+    @SerializedName("source")
+    private String source;
 
-    public Article(Long id, String title, String content, String author, String coverUrl, String publishTime) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.author = author;
-        this.coverUrl = coverUrl;
-        this.publishTime = publishTime;
-    }
+    @SerializedName("type")
+    private String type;
 
-    public Long getId() {
-        return id;
-    }
+    @SerializedName("readCount")
+    private Integer readCount;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @SerializedName("publishTime")
+    private String publishTime;
 
-    public String getTitle() {
-        return title;
-    }
+    @SerializedName("createTime")
+    private String createTime;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public Article() {}
 
-    public String getContent() {
-        return content;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getAuthor() {
-        return author;
-    }
+    public String getSummary() { return summary; }
+    public void setSummary(String summary) { this.summary = summary; }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+    public String getCoverUrl() { return coverUrl; }
+    public void setCoverUrl(String coverUrl) { this.coverUrl = coverUrl; }
 
-    public String getCoverUrl() {
-        return coverUrl;
-    }
+    public String getOriginalUrl() { return originalUrl; }
+    public void setOriginalUrl(String originalUrl) { this.originalUrl = originalUrl; }
 
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl;
-    }
+    public String getSource() { return source; }
+    public void setSource(String source) { this.source = source; }
 
-    public String getPublishTime() {
-        return publishTime;
-    }
-    public String getSummary() {
-        return summary;
-    }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
 
-    public int getReadCount() {
-        return readCount;
-    }
+    public Integer getReadCount() { return readCount; }
+    public void setReadCount(Integer readCount) { this.readCount = readCount; }
 
-    public String getSource() {
-        return source;
-    }
+    public String getPublishTime() { return publishTime; }
+    public void setPublishTime(String publishTime) { this.publishTime = publishTime; }
 
-    public String getOriginalUrl() {
-        return originalUrl;
-    }
+    public String getCreateTime() { return createTime; }
+    public void setCreateTime(String createTime) { this.createTime = createTime; }
 
-    public void setPublishTime(String publishTime) {
-        this.publishTime = publishTime;
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

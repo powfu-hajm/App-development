@@ -15,9 +15,8 @@ import retrofit2.http.Multipart;
 import retrofit2.http.Part;
 import okhttp3.MultipartBody;
 
-import com.example.qxb.model.PageResponse;
+import com.example.qxb.models.PageResponse;
 import com.example.qxb.models.network.ApiResponse;
-import com.example.qxb.models.network.PageData;
 import com.example.qxb.models.network.Diary;
 import com.example.qxb.models.dto.LoginDTO;
 import com.example.qxb.models.network.MoodChartData;
@@ -104,22 +103,21 @@ public interface ApiService {
     @GET("ai/test")
     Call<String> testAI();
 
-    // ========== 文章相关接口 ==========
-    @GET("article/crawl")
-    Call<ApiResponse<String>> triggerCrawl();
-
-    @GET("article/page")
-    Call<PageResponse<Article>> getArticles(
-            @Query("pageNum") int pageNum,
-            @Query("pageSize") int pageSize,
-            @Query("type") int type
-    );
-
+    // 在ApiService.java中修改文章接口部分
     @GET("article/list")
-    Call<PageResponse<Article>> getArticleList(
-            @Query("pageNum") int pageNum,
-            @Query("pageSize") int pageSize
+    Call<ApiResponse<List<Article>>> getArticles();
+
+    // 修改分页接口返回类型为PageResponse
+    @GET("article/page")
+    Call<ApiResponse<PageResponse<Article>>> getArticlePage(
+            @Query("page") int page,
+            @Query("size") int size,
+            @Query("typeId") Integer typeId
     );
+
+    // 添加Article单条查询接口
+    @GET("article/{id}")
+    Call<ApiResponse<Article>> getArticleDetail(@Path("id") Long id);
 }
 
 // ========== DTO Classes ==========

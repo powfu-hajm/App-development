@@ -9,6 +9,12 @@ public class Result<T> implements Serializable {
     private String message;
     private T data;
 
+    public T getData() { return data; }
+    public Integer getCode(){ return code; }
+    public String getMessage(){ return message; }
+
+    public boolean isSuccess(){ return code != null && code == 200; }
+
     public static <T> Result<T> success(T data) {
         Result<T> result = new Result<>();
         result.setCode(200);

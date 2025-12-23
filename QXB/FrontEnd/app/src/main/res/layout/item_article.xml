@@ -16,43 +16,63 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- 标题 -->
+        <!-- 标题 - 使用match_parent确保宽度正确 -->
         <TextView
             android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="文章标题"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="@color/text_primary"/>
+            android:textColor="@color/text_primary"
+            android:maxLines="2"
+            android:ellipsize="end"/>
 
-        <!-- 摘要 summary -->
+        <!-- 摘要 summary - 使用match_parent确保宽度正确 -->
         <TextView
             android:id="@+id/tvSummary"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="文章摘要内容"
             android:textSize="14sp"
             android:textColor="@color/text_secondary"
-            android:layout_marginTop="6dp"/>
+            android:layout_marginTop="8dp"
+            android:maxLines="3"
+            android:ellipsize="end"/>
 
-        <!-- 发布时间 -->
-        <TextView
-            android:id="@+id/tvReadTime"
-            android:layout_width="wrap_content"
+        <!-- 底部信息行 -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/text_hint"
-            android:layout_marginTop="4dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical">
 
-        <!-- 分类 -->
-        <TextView
-            android:id="@+id/tvCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/text_hint"
-            android:layout_marginTop="2dp"/>
+            <!-- 分类 -->
+            <TextView
+                android:id="@+id/tvCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分类"
+                android:textSize="12sp"
+                android:textColor="@color/text_hint"/>
+
+            <!-- 空白占位 -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <!-- 阅读数 -->
+            <TextView
+                android:id="@+id/tvReadTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0阅读"
+                android:textSize="12sp"
+                android:textColor="@color/text_hint"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

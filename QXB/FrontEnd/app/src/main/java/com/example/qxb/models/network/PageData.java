@@ -3,13 +3,13 @@ package com.example.qxb.models.network;
 import java.util.List;
 
 public class PageData<T> {
-    private int page;
-    private int size;
+    private List<T> records;
     private long total;
-    private List<T> data;
+    private int pageNum;
+    private int pageSize;
 
-    public int getPage() { return page; }
-    public int getSize() { return size; }
+    public List<T> getRecords() { return records; }
     public long getTotal() { return total; }
-    public List<T> getData() { return data; }
+    public int getPageNum() { return pageNum; }
+    public int getPageSize() { return pageSize; }
 }

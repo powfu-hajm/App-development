@@ -34,8 +34,10 @@ public class WebConfig implements WebMvcConfigurer {
                         "/error",
                         "/v3/api-docs/**",
                         "/ai/test",
-                        "/article/list",          // 文章列表无需登录
-                        "/article/page",          // 文章分页无需登录
+                        "/article/crawl",        // 放行爬虫接口
+                        "/article/list",         // 放行文章列表
+                        "/article/page",         // 放行文章分页
+                        "/article/**",           // 放行所有文章相关接口（包括详情）
                         "/test/papers",          // 测试问卷列表无需登录
                         "/test/paper/**",        // 问卷详情无需登录
                         "/swagger-ui/**"

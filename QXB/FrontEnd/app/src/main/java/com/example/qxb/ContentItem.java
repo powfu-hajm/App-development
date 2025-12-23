@@ -1,16 +1,31 @@
 package com.example.qxb;
 
+import com.google.gson.annotations.SerializedName;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ContentItem implements Parcelable {
+    @SerializedName("id")
     private String id;
+
+    @SerializedName("title")
     private String title;
+
+    @SerializedName("description")
     private String description;
+
+    @SerializedName("type")
     private String type;
+
+    @SerializedName("mediaUrl")
     private String mediaUrl;
-    private String readTime;  // 新增：阅读时间
-    private String category;  // 新增：分类
+
+    @SerializedName("readTime")
+    private String readTime;
+
+    @SerializedName("category")
+    private String category;
+
 
     // 空构造函数
     public ContentItem() {}
@@ -25,11 +40,12 @@ public class ContentItem implements Parcelable {
 
     // 全参构造函数
     public ContentItem(String id, String title, String description, String type,
-                       String readTime, String category) {
+                       String mediaUrl, String readTime, String category) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.type = type;
+        this.mediaUrl = mediaUrl;
         this.readTime = readTime;
         this.category = category;
     }

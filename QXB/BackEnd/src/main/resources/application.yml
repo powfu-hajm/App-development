@@ -1,8 +1,9 @@
+# application.yml
 server:
   address: 0.0.0.0
   port: 8080
   servlet:
-    context-path: /  # 修改这里，去掉/api前缀
+    context-path: /
 
 spring:
   profiles:
@@ -14,20 +15,6 @@ spring:
     username: root
     password: 1234
 
-  redis:                       # ←← 新增redis
-    host: redis-19190.c83.us-east-1-2.ec2.cloud.redislabs.com:19190
-    port: 19190
-    username: default
-    password: 20050121Cys!
-    database: 0
-    timeout: 1800000
-    lettuce:
-      pool:
-        max-active: 20
-        max-idle: 5
-        min-idle: 0
-        max-wait: -1
-
   application:
     name: emotion-backend
 
@@ -35,6 +22,27 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  data:
+    redis:
+      host: redis-10024.c278.us-east-1-4.ec2.cloud.redislabs.com
+      port: 10024
+      username: default
+      password: H7zsEqHoKV3NT1O5nda7sbGaehDM1TsI
+      database: 0
+      timeout: 5000ms  # 减少超时时间
+      connect-timeout: 3000ms  # 添加连接超时
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
+          enabled: true  # 启用连接池
+
+  # 添加Redis健康检查配置
+  redis:
+    health:
+      enabled: true
 
 ai:
   api:
@@ -42,22 +50,26 @@ ai:
   model:
     name: qwen-turbo
 
+crawler:
+  enable: true
+
 mybatis-plus:
   configuration:
-    map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true  # 开启下划线转驼峰
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 打印SQL日志
+    cache-enabled: false  # 关闭二级缓存
   global-config:
     db-config:
       id-type: auto
-      logic-delete-field: deleted
-      logic-delete-value: 1
-      logic-not-delete-value: 0
+      table-underline: true  # 开启下划线模式
   mapper-locations: classpath*:/mapper/**/*.xml
   type-aliases-package: org.example.emotionbackend.entity
 
 logging:
   level:
     org.example.emotionbackend: debug
+    org.springframework.data.redis: DEBUG  # 添加Redis日志
+    io.lettuce.core: DEBUG  # Lettuce连接池日志
     org.example.emotionbackend.mapper: trace
     org.example.emotionbackend.config.MyMetaObjectHandler: trace
     org.example.emotionbackend.controller.DiaryController: trace
@@ -66,3 +78,13 @@ logging:
 
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n"
+
+# 添加健康检查端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always

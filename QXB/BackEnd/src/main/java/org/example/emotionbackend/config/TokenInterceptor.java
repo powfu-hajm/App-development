@@ -38,15 +38,16 @@ public class TokenInterceptor implements HandlerInterceptor {
             UserContext.setUserId(userId);
         }
 
-        // 完全公开的接口（不需要登录）
-        if (uri.startsWith("/user/login") ||
+        // 完全公开的接口（不需要登录）- 简化逻辑
+        if (uri.startsWith("/article/") ||
+                uri.startsWith("/user/login") ||
                 uri.startsWith("/user/register") ||
                 uri.startsWith("/test/papers") ||
                 uri.startsWith("/test/paper/")) {
             return true; // 放行
         }
 
-        // 需要登录的接口（包括 /test/submit 和 /test/history）
+        // 需要登录的接口
         if (UserContext.getUserId() == null) {
             writeError(response, "缺少Token，请先登录");
             return false;
