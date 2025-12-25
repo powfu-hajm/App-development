@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <!-- 将 Toolbar 放在 CoordinatorLayout 中，与其他界面保持一致 -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorSurface"
+            app:titleCentered="true"
+            app:title="编辑日记"
+            app:titleTextColor="@color/text_primary"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@color/icon_primary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- 内容区域 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="编辑日记"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:gravity="center"
+                android:layout_marginBottom="24dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border"
+                app:cardBackgroundColor="?attr/colorSurface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="请选择心情（最多可选2个）"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- 心情选择 ChipGroup -->
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroupMoods"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:singleSelection="false"
+                        app:selectionRequired="false"
+                        android:layout_marginBottom="16dp">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipHappy"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="开心"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipSweet"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="甜蜜"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipExcited"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="冲鸭"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipCalm"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="悠闲"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipNormal"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="平淡"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipTired"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="疲惫"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipAnxious"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="焦虑"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipDepressed"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="压抑"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipSad"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="难过"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipAngry"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="生气"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp" />
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="写点什么..."
+                        android:textSize="16sp"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="8dp" />
+
+                    <EditText
+                        android:id="@+id/etDiaryContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:background="@drawable/edittext_rounded"
+                        android:padding="12dp"
+                        android:gravity="top"
+                        android:maxLines="5"
+                        android:hint="记录今天的感受..." />
+
+                    <TextView
+                        android:id="@+id/tvCharCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0/45"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary"
+                        android:gravity="end"
+                        android:layout_marginTop="4dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnUpdateDiary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="更新日记"
+                        android:layout_marginTop="16dp"
+                        style="@style/Widget.QXB.Button" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -62,7 +62,7 @@ public class RetrofitClient {
                 } else {
                     // 真机使用电脑局域网IP，请根据实际情况修改
                     // 注意：这里需要你手动修改为你的服务器IP地址
-                    BASE_URL = "http://10.101.134.23:8080/"; // 修改为你的实际IP
+                    BASE_URL = "http://192.168.17.58:8080/"; // 修改为你的实际IP
                     Log.d("NetworkDebug", "使用真机地址: " + BASE_URL);
                 }
             }

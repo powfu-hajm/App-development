@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 启动页主题 -->
+    <style name="Theme.QXB.Launcher" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
+
+    <!-- 旧版圆角按钮 (兼容) -->
+    <style name="RoundedButton" parent="Widget.QXB.Button" />
+
+</resources>

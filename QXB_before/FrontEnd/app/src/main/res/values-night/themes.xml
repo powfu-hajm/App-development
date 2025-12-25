@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ===== 深色主题 ===== -->
+    <style name="Base.Theme.QXB" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- 主色调 -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryContainer">@color/colorSurfaceVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorOnPrimaryContainer">@color/colorOnSurface</item>
+
+        <!-- 次要色调 -->
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryContainer">@color/colorSurfaceVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorOnSecondaryContainer">@color/colorOnSurfaceVariant</item>
+
+        <!-- 表面颜色 -->
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariant</item>
+
+        <!-- 背景颜色 -->
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+
+        <!-- 状态栏和导航栏 -->
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:navigationBarColor">@color/colorSurface</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Material 组件样式 -->
+        <item name="chipStyle">@style/Widget.Material3.Chip.Filter</item>
+        <item name="materialButtonStyle">@style/Widget.QXB.Button</item>
+        <item name="materialCardViewStyle">@style/Widget.QXB.CardView</item>
+
+        <!-- 图标着色 -->
+        <item name="iconTint">@color/icon_primary</item>
+    </style>
+
+    <!-- 完整的应用主题 -->
+    <style name="Theme.QXB" parent="Base.Theme.QXB" />
+
+    <!-- ===== 组件样式 ===== -->
+    <!-- 按钮样式 -->
+    <style name="Widget.QXB.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">12dp</item>
+        <item name="backgroundTint">@color/button_primary_bg</item>
+        <item name="android:textColor">@color/button_primary_text</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- 次要按钮样式 -->
+    <style name="Widget.QXB.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">12dp</item>
+        <item name="strokeColor">@color/border</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- 危险操作按钮样式 -->
+    <style name="Widget.QXB.Button.Danger" parent="Widget.Material3.Button">
+        <item name="cornerRadius">12dp</item>
+        <item name="backgroundTint">@color/error</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- 卡片样式 -->
+    <style name="Widget.QXB.CardView" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/border</item>
+        <item name="cardBackgroundColor">@color/colorSurface</item>
+    </style>
+
+    <!-- 工具栏样式 -->
+    <style name="Widget.QXB.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">?attr/colorSurface</item>
+        <item name="titleTextColor">@color/text_primary</item>
+    </style>
+
+</resources>

@@ -36,8 +36,8 @@ public class AIController {
             // 2. 获取最近历史 (比如最近10条，包含刚才保存的那条)
             List<ChatMessage> history = chatService.getRecentMessages(userId, 10);
 
-            // 3. 调用 AI (传入历史上下文)
-            String reply = aiService.getAIResponse(history);
+            // 3. 调用 AI (传入用户ID以便获取画像 + 历史上下文)
+            String reply = aiService.getAIResponse(userId, history);
 
             // 4. 保存 AI 回复
             chatService.saveMessage(userId, "assistant", reply);

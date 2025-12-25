@@ -24,10 +24,8 @@ spring:
       max-request-size: 10MB
   data:
     redis:
-      host: redis-10024.c278.us-east-1-4.ec2.cloud.redislabs.com
-      port: 10024
-      username: default
-      password: H7zsEqHoKV3NT1O5nda7sbGaehDM1TsI
+      host: localhost
+      port: 6379
       database: 0
       timeout: 5000ms  # 减少超时时间
       connect-timeout: 3000ms  # 添加连接超时

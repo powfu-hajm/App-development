@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?android:attr/colorBackground">
+
+    <!-- 顶部工具栏 -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorSurface"
+        android:elevation="1dp"
+        app:titleCentered="true"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@color/icon_primary">
+
+        <TextView
+            android:id="@+id/tvToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="心理测试"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <!-- 进度条区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="?attr/colorSurfaceVariant">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="第 1/20 题"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary" />
+
+            <TextView
+                android:id="@+id/tvProgressPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0%"
+                android:textSize="14sp"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="8dp"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_bar_style" />
+
+    </LinearLayout>
+
+    <!-- 题目内容区域 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:background="?android:attr/colorBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- 题目 -->
+            <TextView
+                android:id="@+id/tvQuestionContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="题目内容"
+                android:textSize="18sp"
+                android:textColor="@color/text_primary"
+                android:lineSpacingMultiplier="1.3"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 选项列表 -->
+            <RadioGroup
+                android:id="@+id/radioGroupOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/optionA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/selector_option_bg"
+                    android:button="@null"
+                    android:drawableStart="@drawable/selector_radio_button"
+                    android:drawablePadding="12dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_primary" />
+
+                <RadioButton
+                    android:id="@+id/optionB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/selector_option_bg"
+                    android:button="@null"
+                    android:drawableStart="@drawable/selector_radio_button"
+                    android:drawablePadding="12dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_primary" />
+
+                <RadioButton
+                    android:id="@+id/optionC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/selector_option_bg"
+                    android:button="@null"
+                    android:drawableStart="@drawable/selector_radio_button"
+                    android:drawablePadding="12dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_primary" />
+
+                <RadioButton
+                    android:id="@+id/optionD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/selector_option_bg"
+                    android:button="@null"
+                    android:drawableStart="@drawable/selector_radio_button"
+                    android:drawablePadding="12dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_primary" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- 底部按钮区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="?attr/colorSurface"
+        android:elevation="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPrevious"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="上一题"
+            android:textSize="16sp"
+            style="@style/Widget.QXB.Button.Secondary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="下一题"
+            android:textSize="16sp"
+            style="@style/Widget.QXB.Button" />
+
+    </LinearLayout>
+
+</LinearLayout>

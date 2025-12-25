@@ -28,4 +28,9 @@ public interface ITestService {
      * 获取用户的测试历史记录
      */
     List<TestResultDTO> getTestHistory(Long userId);
+
+    /**
+     * 获取用户最新的各项测试结果（如MBTI、SDS等）
+     */
+    String getUserProfile(Long userId);
 }

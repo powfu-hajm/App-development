@@ -194,4 +194,57 @@ public class TestServiceImpl implements ITestService {
             return dto;
         }).collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public String getUserProfile(Long userId) {
+        log.info("构建用户测试画像，userId: {}", userId);
+        StringBuilder profile = new StringBuilder();
+
+        // 获取用户最近的测试记录
+        List<TestRecord> records = recordMapper.selectList(
+                new LambdaQueryWrapper<TestRecord>()
+                        .eq(TestRecord::getUserId, userId)
+                        .orderByDesc(TestRecord::getCreateTime)
+        );
+
+        if (records.isEmpty()) {
+            return "暂无心理测试记录";
+        }
+
+        // 整理最新的各项测试结果
+        // 假设 paperId: 1=SDS(抑郁), 2=SAS(焦虑), 3=PSS(压力), 4=MBTI
+        // 这里需要根据实际数据库中的ID来匹配，或者根据PaperTitle匹配
+        
+        TestRecord mbtiRecord = null;
+        TestRecord sdsRecord = null;
+        TestRecord sasRecord = null;
+        TestRecord pssRecord = null;
+
+        for (TestRecord record : records) {
+            if (mbtiRecord == null && record.getPaperId() == 4) mbtiRecord = record;
+            if (sdsRecord == null && record.getPaperId() == 1) sdsRecord = record;
+            if (sasRecord == null && record.getPaperId() == 2) sasRecord = record;
+            if (pssRecord == null && record.getPaperId() == 3) pssRecord = record;
+        }
+
+        if (mbtiRecord != null) {
+            profile.append("【人格类型(MBTI)】: ").append(mbtiRecord.getResultTitle()).append("\n");
+        }
+        if (sdsRecord != null) {
+            profile.append("【抑郁倾向】: ").append(sdsRecord.getResultTitle()).append("\n");
+        }
+        if (sasRecord != null) {
+            profile.append("【焦虑倾向】: ").append(sasRecord.getResultTitle()).append("\n");
+        }
+        if (pssRecord != null) {
+            profile.append("【压力状况】: ").append(pssRecord.getResultTitle()).append("\n");
+        }
+        
+        if (profile.length() == 0) {
+            return "用户做过测试，但暂无主要指标数据";
+        }
+
+        return profile.toString();
+    }
 }

@@ -21,4 +21,9 @@ public interface IDiaryService extends IService<Diary> {
 
     // 新增：简化版更新方法
     boolean simpleUpdateDiary(DiaryDTO diaryDTO);
+
+    /**
+     * 获取用户最近7天的情绪趋势摘要
+     */
+    String getRecentMoodTrend(Long userId);
 }
