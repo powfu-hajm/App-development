@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 - 黄色 -->
+    <path
+        android:fillColor="#FFB300"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 活力卷发 -->
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M28,55 Q25,25 60,20 Q95,25 92,55 Q95,40 85,30 Q70,20 60,20 Q50,20 35,30 Q25,40 28,55 Z"/>
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M28,38 Q32,28 40,32 M80,32 Q88,28 92,38"/>
+
+    <!-- 脸部 -->
+    <path
+        android:fillColor="#FFE0BD"
+        android:pathData="M40,48 Q40,34 60,34 Q80,34 80,48 L80,72 Q80,86 60,86 Q40,86 40,72 Z"/>
+
+    <!-- 眼睛 - 闪亮活力 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M46,56m-8,0a8,6 0,1 1,16 0a8,6 0,1 1,-16 0"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M74,56m-8,0a8,6 0,1 1,16 0a8,6 0,1 1,-16 0"/>
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M48,56m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M72,56m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+    <!-- 星星高光 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,54m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M74,54m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+
+    <!-- 眉毛 - 开心 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#8D6E63"
+        android:strokeWidth="2"
+        android:pathData="M40,46 Q48,42 56,46 M64,46 Q72,42 80,46"/>
+
+    <!-- 腮红 -->
+    <path
+        android:fillColor="#FFCDD2"
+        android:pathData="M44,66m-4,0a4,2 0,1 1,8 0a4,2 0,1 1,-8 0"/>
+    <path
+        android:fillColor="#FFCDD2"
+        android:pathData="M76,66m-4,0a4,2 0,1 1,8 0a4,2 0,1 1,-8 0"/>
+
+    <!-- 嘴巴 - 开心大笑 -->
+    <path
+        android:fillColor="#E57373"
+        android:pathData="M46,74 Q60,88 74,74 Q60,82 46,74 Z"/>
+
+    <!-- 活力衣服 -->
+    <path
+        android:fillColor="#FFEE58"
+        android:pathData="M35,95 Q45,88 60,88 Q75,88 85,95 L85,110 L35,110 Z"/>
+</vector>

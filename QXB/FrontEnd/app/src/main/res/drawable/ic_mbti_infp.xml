@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 - 青绿色 -->
+    <path
+        android:fillColor="#4DB6AC"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 柔软的中长发 -->
+    <path
+        android:fillColor="#6D4C41"
+        android:pathData="M32,55 Q30,30 60,24 Q90,30 88,55 L88,72 Q82,65 82,55 Q82,38 60,32 Q38,38 38,55 Q38,65 32,72 Z"/>
+
+    <!-- 脸部 -->
+    <path
+        android:fillColor="#FFE0BD"
+        android:pathData="M42,50 Q42,36 60,36 Q78,36 78,50 L78,72 Q78,86 60,86 Q42,86 42,72 Z"/>
+
+    <!-- 眼睛 - 梦幻憧憬 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M47,58m-7,0a7,5 0,1 1,14 0a7,5 0,1 1,-14 0"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M73,58m-7,0a7,5 0,1 1,14 0a7,5 0,1 1,-14 0"/>
+    <path
+        android:fillColor="#795548"
+        android:pathData="M48,58m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+    <path
+        android:fillColor="#795548"
+        android:pathData="M72,58m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+    <!-- 星星眼高光 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,56 L51,57 L50,58 L49,57 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M74,56 L75,57 L74,58 L73,57 Z"/>
+
+    <!-- 腮红 -->
+    <path
+        android:fillColor="#FFCDD2"
+        android:pathData="M44,68m-4,0a4,2 0,1 1,8 0a4,2 0,1 1,-8 0"/>
+    <path
+        android:fillColor="#FFCDD2"
+        android:pathData="M76,68m-4,0a4,2 0,1 1,8 0a4,2 0,1 1,-8 0"/>
+
+    <!-- 嘴巴 - 含羞微笑 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#333333"
+        android:strokeWidth="1.5"
+        android:pathData="M54,77 Q60,80 66,77"/>
+
+    <!-- 衣服 - 柔和色调 -->
+    <path
+        android:fillColor="#80CBC4"
+        android:pathData="M35,95 Q45,88 60,88 Q75,88 85,95 L85,110 L35,110 Z"/>
+</vector>

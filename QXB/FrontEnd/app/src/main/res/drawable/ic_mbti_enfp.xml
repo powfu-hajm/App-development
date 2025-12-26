@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 - 青绿色 -->
+    <path
+        android:fillColor="#26A69A"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 活泼的卷发 -->
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M28,55 Q25,28 60,22 Q95,28 92,55 Q95,45 88,35 Q75,22 60,22 Q45,22 32,35 Q25,45 28,55 Z"/>
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M30,40 Q35,30 42,35 M78,35 Q85,30 90,40"/>
+
+    <!-- 脸部 -->
+    <path
+        android:fillColor="#FFE0BD"
+        android:pathData="M40,50 Q40,36 60,36 Q80,36 80,50 L80,72 Q80,86 60,86 Q40,86 40,72 Z"/>
+
+    <!-- 眼睛 - 闪亮热情 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M47,56m-7,0a7,6 0,1 1,14 0a7,6 0,1 1,-14 0"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M73,56m-7,0a7,6 0,1 1,14 0a7,6 0,1 1,-14 0"/>
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M48,56m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M72,56m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+    <!-- 星星高光 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,54m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M74,54m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+
+    <!-- 眉毛 - 惊喜 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#8D6E63"
+        android:strokeWidth="2"
+        android:pathData="M42,46 Q48,42 54,46 M66,46 Q72,42 78,46"/>
+
+    <!-- 嘴巴 - 开心大笑 -->
+    <path
+        android:fillColor="#E57373"
+        android:pathData="M48,74 Q60,85 72,74 Q60,80 48,74 Z"/>
+
+    <!-- 衣服 - 活力色彩 -->
+    <path
+        android:fillColor="#4DB6AC"
+        android:pathData="M35,95 Q45,88 60,88 Q75,88 85,95 L85,110 L35,110 Z"/>
+</vector>

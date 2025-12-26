@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 - 紫色 -->
+    <path
+        android:fillColor="#9C27B0"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 乱蓬蓬的头发 -->
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M32,50 Q28,30 45,22 Q60,18 75,22 Q92,30 88,50 Q90,40 85,35 Q75,25 60,25 Q45,25 35,35 Q30,40 32,50 Z"/>
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M38,28 Q42,20 50,22 M70,22 Q78,20 82,28"/>
+
+    <!-- 脸部 -->
+    <path
+        android:fillColor="#FFE0BD"
+        android:pathData="M40,48 Q40,35 60,35 Q80,35 80,48 L80,72 Q80,87 60,87 Q40,87 40,72 Z"/>
+
+    <!-- 眼睛 - 好奇的大眼睛 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M45,58m-8,0a8,6 0,1 1,16 0a8,6 0,1 1,-16 0"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M75,58m-8,0a8,6 0,1 1,16 0a8,6 0,1 1,-16 0"/>
+    <path
+        android:fillColor="#333333"
+        android:pathData="M47,58m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+    <path
+        android:fillColor="#333333"
+        android:pathData="M73,58m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+
+    <!-- 眉毛 - 思考 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#5D4037"
+        android:strokeWidth="2"
+        android:pathData="M40,48 Q47,45 54,48 M66,48 Q73,45 80,48"/>
+
+    <!-- 嘴巴 - 思考状 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#333333"
+        android:strokeWidth="2"
+        android:pathData="M55,78 L65,78"/>
+
+    <!-- 衣服 - 休闲 -->
+    <path
+        android:fillColor="#7E57C2"
+        android:pathData="M35,95 Q45,88 60,88 Q75,88 85,95 L85,110 L35,110 Z"/>
+</vector>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 - 黄色 -->
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 简洁短发 -->
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M38,50 Q38,30 60,28 Q82,30 82,50 L82,42 Q82,34 60,32 Q38,34 38,42 Z"/>
+
+    <!-- 脸部 -->
+    <path
+        android:fillColor="#FFE0BD"
+        android:pathData="M42,48 Q42,35 60,35 Q78,35 78,48 L78,72 Q78,86 60,86 Q42,86 42,72 Z"/>
+
+    <!-- 眼睛 - 冷静观察 -->
+    <path
+        android:fillColor="#333333"
+        android:pathData="M48,58m-4,0a4,3 0,1 1,8 0a4,3 0,1 1,-8 0"/>
+    <path
+        android:fillColor="#333333"
+        android:pathData="M72,58m-4,0a4,3 0,1 1,8 0a4,3 0,1 1,-8 0"/>
+
+    <!-- 眉毛 - 冷静 -->
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M42,50 L56,50 L56,52 L42,52 Z"/>
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M64,50 L78,50 L78,52 L64,52 Z"/>
+
+    <!-- 嘴巴 - 酷 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#333333"
+        android:strokeWidth="2"
+        android:pathData="M54,76 L66,76"/>
+
+    <!-- 工装衣服 -->
+    <path
+        android:fillColor="#795548"
+        android:pathData="M35,95 Q45,88 60,88 Q75,88 85,95 L85,110 L35,110 Z"/>
+
+    <!-- 工具口袋 -->
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M42,98 L52,98 L52,105 L42,105 Z"/>
+</vector>

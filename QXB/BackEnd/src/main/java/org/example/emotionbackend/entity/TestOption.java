@@ -29,6 +29,12 @@ public class TestOption implements Serializable {
     @TableField("score")
     private Integer score;
 
+    /**
+     * MBTI维度标识：E/I/S/N/T/F/J/P
+     */
+    @TableField("dimension")
+    private String dimension;
+
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 

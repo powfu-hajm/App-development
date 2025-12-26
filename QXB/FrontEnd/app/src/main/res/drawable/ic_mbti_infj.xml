@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 - 青绿色 -->
+    <path
+        android:fillColor="#00BFA5"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 长发 -->
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M30,55 Q28,30 60,22 Q92,30 90,55 L90,80 Q85,75 85,55 Q85,35 60,30 Q35,35 35,55 Q35,75 30,80 Z"/>
+
+    <!-- 脸部 -->
+    <path
+        android:fillColor="#FFE0BD"
+        android:pathData="M42,48 Q42,35 60,35 Q78,35 78,48 L78,70 Q78,85 60,85 Q42,85 42,70 Z"/>
+
+    <!-- 眼睛 - 深邃温柔 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M48,58m-6,0a6,5 0,1 1,12 0a6,5 0,1 1,-12 0"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M72,58m-6,0a6,5 0,1 1,12 0a6,5 0,1 1,-12 0"/>
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M48,58m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M72,58m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+
+    <!-- 眉毛 - 柔和 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#3E2723"
+        android:strokeWidth="1.5"
+        android:pathData="M42,50 Q48,48 54,50 M66,50 Q72,48 78,50"/>
+
+    <!-- 嘴巴 - 温和微笑 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#333333"
+        android:strokeWidth="2"
+        android:pathData="M52,76 Q60,80 68,76"/>
+
+    <!-- 衣服 -->
+    <path
+        android:fillColor="#26A69A"
+        android:pathData="M35,95 Q45,88 60,88 Q75,88 85,95 L85,110 L35,110 Z"/>
+</vector>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 - 橙色 -->
+    <path
+        android:fillColor="#E65100"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 干练短发 -->
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M36,48 Q36,28 60,25 Q84,28 84,48 L84,38 Q84,30 60,28 Q36,30 36,38 Z"/>
+
+    <!-- 脸部 -->
+    <path
+        android:fillColor="#FFE0BD"
+        android:pathData="M40,46 Q40,32 60,32 Q80,32 80,46 L80,70 Q80,84 60,84 Q40,84 40,70 Z"/>
+
+    <!-- 眼睛 - 果断自信 -->
+    <path
+        android:fillColor="#333333"
+        android:pathData="M48,54m-4,0a4,3 0,1 1,8 0a4,3 0,1 1,-8 0"/>
+    <path
+        android:fillColor="#333333"
+        android:pathData="M72,54m-4,0a4,3 0,1 1,8 0a4,3 0,1 1,-8 0"/>
+
+    <!-- 眉毛 - 坚定 -->
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M42,46 L56,48 L56,46 L42,44 Z"/>
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M64,46 L78,44 L78,46 L64,48 Z"/>
+
+    <!-- 嘴巴 - 自信 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#333333"
+        android:strokeWidth="2.5"
+        android:pathData="M50,72 Q60,76 70,72"/>
+
+    <!-- 西装 -->
+    <path
+        android:fillColor="#263238"
+        android:pathData="M35,95 L52,88 L60,92 L68,88 L85,95 L85,110 L35,110 Z"/>
+
+    <!-- 领带 -->
+    <path
+        android:fillColor="#FF6F00"
+        android:pathData="M58,88 L60,105 L62,88 Z"/>
+</vector>
