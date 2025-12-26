@@ -394,6 +394,67 @@ public class TestServiceImpl implements ITestService {
             TestPaper paper = paperMapper.selectById(record.getPaperId());
             dto.setPaperTitle(paper != null ? paper.getTitle() : "");
 
+            // 如果是MBTI测试，填充MBTI专属字段
+            if (MBTI_PAPER_ID.equals(record.getPaperId())) {
+                dto.setIsMbtiResult(true);
+                dto.setMbtiType(record.getResultLevel()); // resultLevel存储的是MBTI类型代码
+
+                // 从answers字段解析维度百分比
+                if (record.getAnswers() != null && !record.getAnswers().isEmpty()) {
+                    try {
+                        Map<String, Integer> percentData = objectMapper.readValue(
+                                record.getAnswers(), new TypeReference<Map<String, Integer>>() {});
+                        dto.setEPercent(percentData.getOrDefault("ePercent", 50));
+                        dto.setIPercent(percentData.getOrDefault("iPercent", 50));
+                        dto.setSPercent(percentData.getOrDefault("sPercent", 50));
+                        dto.setNPercent(percentData.getOrDefault("nPercent", 50));
+                        dto.setTPercent(percentData.getOrDefault("tPercent", 50));
+                        dto.setFPercent(percentData.getOrDefault("fPercent", 50));
+                        dto.setJPercent(percentData.getOrDefault("jPercent", 50));
+                        dto.setPPercent(percentData.getOrDefault("pPercent", 50));
+                    } catch (Exception e) {
+                        log.error("解析MBTI维度百分比失败", e);
+                    }
+                }
+
+                // 获取MBTI类型详细信息
+                MbtiType mbtiTypeInfo = mbtiTypeMapper.selectByTypeCode(record.getResultLevel());
+                if (mbtiTypeInfo != null) {
+                    dto.setTypeName(mbtiTypeInfo.getTypeName());
+                    dto.setTypeNameEn(mbtiTypeInfo.getTypeNameEn());
+                    dto.setTypeGroup(mbtiTypeInfo.getTypeGroup());
+                    dto.setBriefDesc(mbtiTypeInfo.getBriefDesc());
+                    dto.setDetailDesc(mbtiTypeInfo.getDetailDesc());
+                    dto.setImageName(mbtiTypeInfo.getImageName());
+                    dto.setColorPrimary(mbtiTypeInfo.getColorPrimary());
+                    dto.setColorSecondary(mbtiTypeInfo.getColorSecondary());
+
+                    // 解析JSON数组字段
+                    try {
+                        if (mbtiTypeInfo.getStrengths() != null) {
+                            dto.setStrengths(objectMapper.readValue(
+                                    mbtiTypeInfo.getStrengths(), new TypeReference<List<String>>() {}));
+                        }
+                        if (mbtiTypeInfo.getWeaknesses() != null) {
+                            dto.setWeaknesses(objectMapper.readValue(
+                                    mbtiTypeInfo.getWeaknesses(), new TypeReference<List<String>>() {}));
+                        }
+                        if (mbtiTypeInfo.getCareerSuggestions() != null) {
+                            dto.setCareerSuggestions(objectMapper.readValue(
+                                    mbtiTypeInfo.getCareerSuggestions(), new TypeReference<List<String>>() {}));
+                        }
+                        if (mbtiTypeInfo.getFamousPeople() != null) {
+                            dto.setFamousPeople(objectMapper.readValue(
+                                    mbtiTypeInfo.getFamousPeople(), new TypeReference<List<String>>() {}));
+                        }
+                    } catch (Exception e) {
+                        log.error("解析MBTI类型JSON字段失败", e);
+                    }
+                }
+            } else {
+                dto.setIsMbtiResult(false);
+            }
+
             return dto;
         }).collect(Collectors.toList());
     }
